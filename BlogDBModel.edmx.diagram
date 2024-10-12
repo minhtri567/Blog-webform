@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f3b99a0383574fde924d1bc520f74fe1" Name="Diagram1">
+        <EntityTypeShape EntityType="data_blogModel.Blog" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="data_blogModel.Comment" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="data_blogModel.Danhmuc" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="data_blogModel.Friend" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="data_blogModel.LoaiDanhmuc" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="data_blogModel.Preference" Width="1.5" PointX="3" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="data_blogModel.User" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <AssociationConnector Association="data_blogModel.FK__Blogs__Blogdanhm__6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="data_blogModel.FK__Blogs__UserId__6383C8BA" ManuallyRouted="false" />
+        <AssociationConnector Association="data_blogModel.FK__Comments__BlogId__6A30C649" ManuallyRouted="false" />
+        <AssociationConnector Association="data_blogModel.FK__Comments__UserId__6B24EA82" ManuallyRouted="false" />
+        <AssociationConnector Association="data_blogModel.FK__LoaiDanhm__Danhm__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="data_blogModel.FK__Friends__FriendU__6FE99F9F" ManuallyRouted="false" />
+        <AssociationConnector Association="data_blogModel.FK__Friends__UserId__6EF57B66" ManuallyRouted="false" />
+        <AssociationConnector Association="data_blogModel.FK__Preferenc__UserI__72C60C4A" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
