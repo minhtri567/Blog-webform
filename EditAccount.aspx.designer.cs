@@ -24,6 +24,24 @@ namespace BTLBlog
         protected global::System.Web.UI.WebControls.Label lblMessage;
 
         /// <summary>
+        /// selectedAvatar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image selectedAvatar;
+
+        /// <summary>
+        /// fileInput control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload fileInput;
+
+        /// <summary>
         /// txtUsername control.
         /// </summary>
         /// <remarks>

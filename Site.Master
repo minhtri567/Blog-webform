@@ -13,46 +13,59 @@
     <link rel="stylesheet" href="~/Content/font-awesome/css/all.min.css">
     <link rel="stylesheet" href="~/Content/bootstrap/css/bootstrap.min.css">
 
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/Content/bootstrap/js/bootstrap.bundle.min.js") %>
+        <%: Scripts.Render("~/Scripts/MyScript.js") %>
+    </asp:PlaceHolder>
 </head>
 <body>
+    
     <form runat="server">
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm">
-            <div class="container">
-                <a class="navbar-brand" runat="server" href="~/">Application name</a>
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/">Home</a></li>
-                    </ul>
-                    <div class="navbar-right">
-                        <asp:PlaceHolder ID="phNotLoggedIn" runat="server">
-                            <a href="Login">Đăng nhập</a> | 
-                            <a href="Register">Đăng ký</a>
-                        </asp:PlaceHolder>
+        <header class="navbar navbar-expand-sm navbar-toggleable-sm sticky-top">
+            <nav class="blog-nav">
+                <div class="container blog-nav-container">
+                    <a class="navbar-brand" runat="server" href="~/">Bloog</a>
+                    <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse d-sm-inline-flex justify-content-end">
+                        <ul class="navbar-nav flex-grow-1 navbar-center">
+                            <li class="nav-item"><a class="nav-link" runat="server" href="~/">Home</a></li>
+                        </ul>
+                        <div class="navbar-right">
+                            <asp:PlaceHolder ID="phNotLoggedIn" runat="server">
+                                <a href="Login">Đăng nhập</a> | 
+                                <a href="Register">Đăng ký</a>
+                            </asp:PlaceHolder>
 
-                        <asp:PlaceHolder ID="phLoggedIn" runat="server" Visible="false">
-                            <div class="dropdown">
-                              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <span>Chào, <asp:Label ID="lblUsername" runat="server" Text=""></asp:Label></span> |
-                              </button>
-                              <ul class="dropdown-menu">
-                                  <li>
-                                    <asp:LinkButton ID="btnLogout" runat="server" OnClick="btnLogout_Click" Text="Đăng xuất" class="dropdown-item" />
-                                  </li>
-                                  <li>
-                                    <a class="dropdown-item" href="AccountInfo">Thông tin tài khoản</a>
-                                 </li>
-                              </ul>
-                            </div>
-                        </asp:PlaceHolder>
+                            <asp:PlaceHolder ID="phLoggedIn" runat="server" Visible="false">
+                                <div class="dropdown">
+                                  <button class="dropdown-toggle dropdown-avartar" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <asp:Image runat="server" ID="avartarimg" style="width: 32px; height: 32px; object-fit: cover;" />
+                                  </button>
+                                  <ul class="dropdown-menu dropdown-menu-end">
+                                      <asp:PlaceHolder ID="adminPanel" runat="server">
+                                          <li>
+                                              <a class="dropdown-item" runat="server" href="Adminhome">Trang quản trị</a>
+                                          </li>
+                                      </asp:PlaceHolder>
+                                      <li>
+                                          <a class="dropdown-item" href="AccountInfo">Thông tin tài khoản</a>
+                                        </li>
+                                      <li>
+                                        <asp:LinkButton ID="btnLogout" runat="server" OnClick="btnLogout_Click" Text="Đăng xuất" class="dropdown-item" />
+                                      </li>
+                                      
+                                  </ul>
+                                </div>
+                            </asp:PlaceHolder>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </nav>
-        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+            </nav>
+        </header>
+        <div class="toast-container position-fixed bottom-0 top-0 p-3">
             <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header">
                     <img id="toastImage" src="" class="rounded me-2" width="20" height="20">
@@ -72,9 +85,6 @@
             </footer>
         </div>
     </form>
-    <asp:PlaceHolder runat="server">
-        <%: Scripts.Render("~/Content/bootstrap/js/bootstrap.bundle.min.js") %>
-        <%: Scripts.Render("~/Scripts/MyScript.js") %>
-    </asp:PlaceHolder>
+    
 </body>
 </html>

@@ -65,3 +65,42 @@ textarea {
 .user-link {
     color: #7d7d7d;
 }
+header.navbar{
+    padding :0;
+}
+.blog-nav {
+    width : 100%;
+    background-image: linear-gradient(rgba(112.520718, 44.062154, 249.437846, 1), rgba(112.520718, 44.062154, 249.437846, 0.95));
+}
+.blog-nav .blog-nav-container {
+    display: flex;
+    padding: 8px 0px;
+    justify-content: space-between;
+    position: relative;
+    align-items: center;
+}
+.blog-nav .blog-nav-container .nav-item a {
+    color : rgba(255, 255, 255, 0.85);
+    text-decoration : none;
+}
+.blog-nav .blog-nav-container .nav-item a:hover {
+    color : #fff;
+}
+.blog-nav .dropdown-menu a {
+    color : #212529;
+}
+.dropdown-avartar {
+    border: none;
+    background: none;
+}
+.dropdown-avartar img {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    border-radius : 50%;
+}
+.navbar-center {
+    position :absolute;
+    left : 50%;
+    transform : translateX(-50%)
+}

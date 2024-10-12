@@ -41,6 +41,7 @@ namespace BTLBlog
 
                 Session["Username"] = user.Username;
                 Session["UserId"] = user.UserId;
+                Session["ProfilePicture"] = user.ProfilePicture;
 
                 if (chkRememberMe.Checked)
                 {

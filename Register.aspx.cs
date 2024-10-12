@@ -42,6 +42,7 @@ namespace BTLBlog
                     Username = username,
                     Email = email,
                     PasswordHash = passwordHash,
+                    Role = "User",
                     CreatedDate = DateTime.Now
                 };
 

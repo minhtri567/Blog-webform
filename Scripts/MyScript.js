@@ -11,5 +11,15 @@
             const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
             toastBootstrap.show();
         }
+    },
+    displaySelectedImage: function (event, imgId) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById(imgId).src = e.target.result;
+            };
+            reader.readAsDataURL(file); // Đọc file
+        }
     }
 }

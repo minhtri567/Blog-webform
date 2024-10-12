@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -29,6 +30,17 @@ namespace BTLBlog
                         }
                     }
                 }
+                var userImg = Session["ProfilePicture"];
+                if (userImg != null)
+                {
+                    string imgUrl = userImg.ToString();
+
+                    selectedAvatar.ImageUrl = imgUrl;
+                }
+                else
+                {
+                    selectedAvatar.ImageUrl = "images/user.png";
+                }
             }
         }
         protected void btnSave_Click(object sender, EventArgs e)
@@ -39,22 +51,59 @@ namespace BTLBlog
             {
                 var user = context.Users.SingleOrDefault(u => u.UserId == userId);
 
-                if (user != null)
+                if (user == null)
                 {
-                    user.Username = txtUsername.Text;
-                    user.Email = txtEmail.Text;
-                    user.Bio = txtBio.Text;
-                    context.SaveChanges();
-
-                    string script = "<script>Custom.Mytoast('Cập nhật thành công!', '/images/success.svg');</script>";
-                    ClientScript.RegisterStartupScript(this.GetType(), "ShowToast", script);
-
+                    string scripts = "<script>Custom.Mytoast('Cập nhật thất bại! Người dùng không tồn tại!', '~/images/error.svg');</script>";
+                    ClientScript.RegisterStartupScript(this.GetType(), "ShowToast", scripts);
+                    return; // Thoát nếu người dùng không tồn tại
                 }
-                else
+
+                if (fileInput.HasFile)
                 {
-                    string script = "<script>Custom.Mytoast('Cập nhật thất bại!', '/images/error.svg');</script>";
-                    ClientScript.RegisterStartupScript(this.GetType(), "ShowToast", script);
+                    try
+                    {
+                        // Đường dẫn đến thư mục trên server nơi bạn muốn lưu ảnh
+                        string folderPath = Server.MapPath("~/images/");
+
+                        if (!Directory.Exists(folderPath))
+                        {
+                            Directory.CreateDirectory(folderPath);
+                        }
+
+                        if (!string.IsNullOrEmpty(user.ProfilePicture))
+                        {
+                            string oldImagePath = Server.MapPath(user.ProfilePicture);
+                            if (File.Exists(oldImagePath))
+                            {
+                                File.Delete(oldImagePath); // Xóa ảnh cũ
+                            }
+                        }
+
+                        // Lấy tên tệp và kết hợp với đường dẫn
+                        string fileName = Guid.NewGuid().ToString() + Path.GetExtension(fileInput.FileName);
+                        string fullPath = Path.Combine(folderPath, fileName);
+
+                        // Lưu tệp hình ảnh lên server
+                        fileInput.SaveAs(fullPath);
+
+                        // Cập nhật đường dẫn trong Session và CSDL
+                        Session["ProfilePicture"] = "~/images/" + fileName;
+                        user.ProfilePicture = "~/images/" + fileName;
+                    }
+                    catch (Exception ex)
+                    {
+                        lblMessage.Text = "Có lỗi xảy ra: " + ex.Message;
+                    }
                 }
+
+                // Cập nhật thông tin người dùng
+                user.Username = txtUsername.Text;
+                user.Email = txtEmail.Text;
+                user.Bio = txtBio.Text;
+                context.SaveChanges();
+
+                string script = "<script>Custom.Mytoast('Cập nhật thành công!', 'images/success.svg');</script>";
+                ClientScript.RegisterStartupScript(this.GetType(), "ShowToast", script);
             }
         }
     }

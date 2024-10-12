@@ -109,6 +109,7 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="AccountInfo.aspx" />
+    <Content Include="Adminhome.aspx" />
     <Content Include="BlogDBModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>BlogDBModel.edmx</DependentUpon>
@@ -184,6 +185,7 @@
     <Content Include="Global.asax" />
     <Content Include="images\error.svg" />
     <Content Include="images\success.svg" />
+    <Content Include="images\user.png" />
     <Content Include="Login.aspx" />
     <Content Include="Register.aspx" />
     <EntityDeploy Include="BlogDBModel.edmx">
@@ -237,6 +239,20 @@
     </Compile>
     <Compile Include="AccountInfo.aspx.designer.cs">
       <DependentUpon>AccountInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin.Master.cs">
+      <DependentUpon>Admin.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin.Master.designer.cs">
+      <DependentUpon>Admin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Adminhome.aspx.cs">
+      <DependentUpon>Adminhome.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Adminhome.aspx.designer.cs">
+      <DependentUpon>Adminhome.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
@@ -465,6 +481,7 @@
     <Content Include="Content\bootstrap\scss\_utilities.scss" />
     <Content Include="Content\bootstrap\scss\_variables-dark.scss" />
     <Content Include="Content\bootstrap\scss\_variables.scss" />
+    <Content Include="Admin.Master" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

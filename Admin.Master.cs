@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace BTLBlog
 {
-    public partial class SiteMaster : MasterPage
+    public partial class Admin : System.Web.UI.MasterPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -57,17 +56,11 @@ namespace BTLBlog
                 }
                 string Urole = (string)Session["Role"];
 
-                if (Urole == "Admin")
+                if (Urole != "Admin")
                 {
-                    adminPanel.Visible = true;
-                }
-                else
-                {
-                    // Ẩn chức năng chỉ dành cho Admin
-                    adminPanel.Visible = false;
+                    Response.Redirect("Default.aspx");
                 }
             }
-
         }
         protected void btnLogout_Click(object sender, EventArgs e)
         {
@@ -75,7 +68,7 @@ namespace BTLBlog
             if (Request.Cookies["RememberMe"] != null)
             {
                 HttpCookie rememberMeCookie = new HttpCookie("RememberMe");
-                rememberMeCookie.Expires = DateTime.Now.AddDays(-1); 
+                rememberMeCookie.Expires = DateTime.Now.AddDays(-1);
                 Response.Cookies.Add(rememberMeCookie);
             }
             Session.Abandon();
