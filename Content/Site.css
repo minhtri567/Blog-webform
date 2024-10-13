@@ -86,9 +86,6 @@ header.navbar{
 .blog-nav .blog-nav-container .nav-item a:hover {
     color : #fff;
 }
-.blog-nav .dropdown-menu a {
-    color : #212529;
-}
 .dropdown-avartar {
     border: none;
     background: none;
@@ -103,4 +100,14 @@ header.navbar{
     position :absolute;
     left : 50%;
     transform : translateX(-50%)
+}
+.blog-nav .navbar-right > a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.85);
+}
+.blog-nav .navbar-right > a:hover {
+    color: #fff;
+}
+.blog-nav .dropdown-menu a {
+    color: #212529;
 }
