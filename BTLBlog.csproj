@@ -109,6 +109,7 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="AccountInfo.aspx" />
+    <Content Include="Admindanhmuc.aspx" />
     <Content Include="Adminhome.aspx" />
     <Content Include="Adminloaidanhmuc.aspx" />
     <Content Include="BlogDBModel.Context.tt">
@@ -247,6 +248,13 @@
     </Compile>
     <Compile Include="Admin.Master.designer.cs">
       <DependentUpon>Admin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Admindanhmuc.aspx.cs">
+      <DependentUpon>Admindanhmuc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admindanhmuc.aspx.designer.cs">
+      <DependentUpon>Admindanhmuc.aspx</DependentUpon>
     </Compile>
     <Compile Include="Adminhome.aspx.cs">
       <DependentUpon>Adminhome.aspx</DependentUpon>
