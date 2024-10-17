@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="data_blogModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="data_blogModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Blogs">
           <Key>
             <PropertyRef Name="BlogId" />
@@ -34,6 +34,8 @@
           </Key>
           <Property Name="DanhmucId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TenDanhmuc" Type="nvarchar" MaxLength="100" />
+          <Property Name="MaDanhmuc" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdLoaiDanhmuc" Type="int" />
         </EntityType>
         <EntityType Name="Friends">
           <Key>
@@ -49,9 +51,8 @@
             <PropertyRef Name="LoaiDanhmucId" />
           </Key>
           <Property Name="LoaiDanhmucId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DanhmucId" Type="int" />
           <Property Name="TenLoai" Type="nvarchar" MaxLength="100" />
-          <Property Name="MaLoai" Type="nvarchar" MaxLength="100" />
+          <Property Name="MaLoai" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="Preferences">
           <Key>
@@ -134,18 +135,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Friends__FriendU__6FE99F9F">
-          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
-          <End Role="Friends" Type="Self.Friends" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="Friends">
-              <PropertyRef Name="FriendUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Friends__UserId__6EF57B66">
           <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
           <End Role="Friends" Type="Self.Friends" Multiplicity="*" />
@@ -158,18 +147,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__LoaiDanhm__Danhm__60A75C0F">
-          <End Role="Danhmuc" Type="Self.Danhmuc" Multiplicity="0..1" />
-          <End Role="LoaiDanhmuc" Type="Self.LoaiDanhmuc" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Danhmuc">
-              <PropertyRef Name="DanhmucId" />
-            </Principal>
-            <Dependent Role="LoaiDanhmuc">
-              <PropertyRef Name="DanhmucId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Preferenc__UserI__72C60C4A">
           <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
           <End Role="Preferences" Type="Self.Preferences" Multiplicity="*" />
@@ -179,6 +156,18 @@
             </Principal>
             <Dependent Role="Preferences">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoaiDanhmuc">
+          <End Role="LoaiDanhmuc" Type="Self.LoaiDanhmuc" Multiplicity="0..1" />
+          <End Role="Danhmuc" Type="Self.Danhmuc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiDanhmuc">
+              <PropertyRef Name="LoaiDanhmucId" />
+            </Principal>
+            <Dependent Role="Danhmuc">
+              <PropertyRef Name="IdLoaiDanhmuc" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -207,25 +196,20 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="Comments" EntitySet="Comments" />
           </AssociationSet>
-          <AssociationSet Name="FK__Friends__FriendU__6FE99F9F" Association="Self.FK__Friends__FriendU__6FE99F9F">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Friends" EntitySet="Friends" />
-          </AssociationSet>
           <AssociationSet Name="FK__Friends__UserId__6EF57B66" Association="Self.FK__Friends__UserId__6EF57B66">
             <End Role="Users" EntitySet="Users" />
             <End Role="Friends" EntitySet="Friends" />
-          </AssociationSet>
-          <AssociationSet Name="FK__LoaiDanhm__Danhm__60A75C0F" Association="Self.FK__LoaiDanhm__Danhm__60A75C0F">
-            <End Role="Danhmuc" EntitySet="Danhmuc" />
-            <End Role="LoaiDanhmuc" EntitySet="LoaiDanhmuc" />
           </AssociationSet>
           <AssociationSet Name="FK__Preferenc__UserI__72C60C4A" Association="Self.FK__Preferenc__UserI__72C60C4A">
             <End Role="Users" EntitySet="Users" />
             <End Role="Preferences" EntitySet="Preferences" />
           </AssociationSet>
+          <AssociationSet Name="FK_LoaiDanhmuc" Association="Self.FK_LoaiDanhmuc">
+            <End Role="LoaiDanhmuc" EntitySet="LoaiDanhmuc" />
+            <End Role="Danhmuc" EntitySet="Danhmuc" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="data_blogModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -241,9 +225,9 @@
           <Property Name="BlogCreatedDate" Type="DateTime" Precision="3" />
           <Property Name="Bloglike" Type="Int32" />
           <Property Name="BlogComments" Type="Int32" />
-          <NavigationProperty Name="Danhmuc" Relationship="Self.FK__Blogs__Blogdanhm__6477ECF3" FromRole="Blogs" ToRole="Danhmuc" />
           <NavigationProperty Name="User" Relationship="Self.FK__Blogs__UserId__6383C8BA" FromRole="Blogs" ToRole="Users" />
           <NavigationProperty Name="Comments" Relationship="Self.FK__Comments__BlogId__6A30C649" FromRole="Blogs" ToRole="Comments" />
+          <NavigationProperty Name="Danhmuc" Relationship="data_blogModel.FK__Blogs__Blogdanhm__6477ECF3" FromRole="Blog" ToRole="Danhmuc" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -256,36 +240,6 @@
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Blog" Relationship="Self.FK__Comments__BlogId__6A30C649" FromRole="Comments" ToRole="Blogs" />
           <NavigationProperty Name="User" Relationship="Self.FK__Comments__UserId__6B24EA82" FromRole="Comments" ToRole="Users" />
-        </EntityType>
-        <EntityType Name="Danhmuc">
-          <Key>
-            <PropertyRef Name="DanhmucId" />
-          </Key>
-          <Property Name="DanhmucId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TenDanhmuc" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Blogs" Relationship="Self.FK__Blogs__Blogdanhm__6477ECF3" FromRole="Danhmuc" ToRole="Blogs" />
-          <NavigationProperty Name="LoaiDanhmucs" Relationship="Self.FK__LoaiDanhm__Danhm__60A75C0F" FromRole="Danhmuc" ToRole="LoaiDanhmuc" />
-        </EntityType>
-        <EntityType Name="Friend">
-          <Key>
-            <PropertyRef Name="FriendId" />
-          </Key>
-          <Property Name="FriendId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" />
-          <Property Name="FriendUserId" Type="Int32" />
-          <Property Name="FriendUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="User" Relationship="Self.FK__Friends__FriendU__6FE99F9F" FromRole="Friends" ToRole="Users" />
-          <NavigationProperty Name="User1" Relationship="Self.FK__Friends__UserId__6EF57B66" FromRole="Friends" ToRole="Users" />
-        </EntityType>
-        <EntityType Name="LoaiDanhmuc">
-          <Key>
-            <PropertyRef Name="LoaiDanhmucId" />
-          </Key>
-          <Property Name="LoaiDanhmucId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DanhmucId" Type="Int32" />
-          <Property Name="TenLoai" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="MaLoai" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Danhmuc" Relationship="Self.FK__LoaiDanhm__Danhm__60A75C0F" FromRole="LoaiDanhmuc" ToRole="Danhmuc" />
         </EntityType>
         <EntityType Name="Preference">
           <Key>
@@ -322,22 +276,9 @@
           <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Blogs" Relationship="Self.FK__Blogs__UserId__6383C8BA" FromRole="Users" ToRole="Blogs" />
           <NavigationProperty Name="Comments" Relationship="Self.FK__Comments__UserId__6B24EA82" FromRole="Users" ToRole="Comments" />
-          <NavigationProperty Name="Friends" Relationship="Self.FK__Friends__FriendU__6FE99F9F" FromRole="Users" ToRole="Friends" />
-          <NavigationProperty Name="Friends1" Relationship="Self.FK__Friends__UserId__6EF57B66" FromRole="Users" ToRole="Friends" />
           <NavigationProperty Name="Preferences" Relationship="Self.FK__Preferenc__UserI__72C60C4A" FromRole="Users" ToRole="Preferences" />
+          <NavigationProperty Name="Friends" Relationship="data_blogModel.FK__Friends__UserId__6EF57B66" FromRole="User" ToRole="Friend" />
         </EntityType>
-        <Association Name="FK__Blogs__Blogdanhm__6477ECF3">
-          <End Role="Danhmuc" Type="Self.Danhmuc" Multiplicity="0..1" />
-          <End Role="Blogs" Type="Self.Blog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Danhmuc">
-              <PropertyRef Name="DanhmucId" />
-            </Principal>
-            <Dependent Role="Blogs">
-              <PropertyRef Name="Blogdanhmuc" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Blogs__UserId__6383C8BA">
           <End Role="Users" Type="Self.User" Multiplicity="0..1" />
           <End Role="Blogs" Type="Self.Blog" Multiplicity="*" />
@@ -374,42 +315,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__LoaiDanhm__Danhm__60A75C0F">
-          <End Role="Danhmuc" Type="Self.Danhmuc" Multiplicity="0..1" />
-          <End Role="LoaiDanhmuc" Type="Self.LoaiDanhmuc" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Danhmuc">
-              <PropertyRef Name="DanhmucId" />
-            </Principal>
-            <Dependent Role="LoaiDanhmuc">
-              <PropertyRef Name="DanhmucId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Friends__FriendU__6FE99F9F">
-          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
-          <End Role="Friends" Type="Self.Friend" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="Friends">
-              <PropertyRef Name="FriendUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Friends__UserId__6EF57B66">
-          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
-          <End Role="Friends" Type="Self.Friend" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="Friends">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Preferenc__UserI__72C60C4A">
           <End Role="Users" Type="Self.User" Multiplicity="0..1" />
           <End Role="Preferences" Type="Self.Preference" Multiplicity="*" />
@@ -425,16 +330,9 @@
         <EntityContainer Name="data_blogEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Blogs" EntityType="Self.Blog" />
           <EntitySet Name="Comments" EntityType="Self.Comment" />
-          <EntitySet Name="Danhmucs" EntityType="Self.Danhmuc" />
-          <EntitySet Name="Friends" EntityType="Self.Friend" />
-          <EntitySet Name="LoaiDanhmucs" EntityType="Self.LoaiDanhmuc" />
           <EntitySet Name="Preferences" EntityType="Self.Preference" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Users" EntityType="Self.User" />
-          <AssociationSet Name="FK__Blogs__Blogdanhm__6477ECF3" Association="Self.FK__Blogs__Blogdanhm__6477ECF3">
-            <End Role="Danhmuc" EntitySet="Danhmucs" />
-            <End Role="Blogs" EntitySet="Blogs" />
-          </AssociationSet>
           <AssociationSet Name="FK__Blogs__UserId__6383C8BA" Association="Self.FK__Blogs__UserId__6383C8BA">
             <End Role="Users" EntitySet="Users" />
             <End Role="Blogs" EntitySet="Blogs" />
@@ -447,23 +345,92 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="Comments" EntitySet="Comments" />
           </AssociationSet>
-          <AssociationSet Name="FK__LoaiDanhm__Danhm__60A75C0F" Association="Self.FK__LoaiDanhm__Danhm__60A75C0F">
-            <End Role="Danhmuc" EntitySet="Danhmucs" />
-            <End Role="LoaiDanhmuc" EntitySet="LoaiDanhmucs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Friends__FriendU__6FE99F9F" Association="Self.FK__Friends__FriendU__6FE99F9F">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Friends" EntitySet="Friends" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Friends__UserId__6EF57B66" Association="Self.FK__Friends__UserId__6EF57B66">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Friends" EntitySet="Friends" />
-          </AssociationSet>
           <AssociationSet Name="FK__Preferenc__UserI__72C60C4A" Association="Self.FK__Preferenc__UserI__72C60C4A">
             <End Role="Users" EntitySet="Users" />
             <End Role="Preferences" EntitySet="Preferences" />
           </AssociationSet>
+          <EntitySet Name="Danhmucs" EntityType="data_blogModel.Danhmuc" />
+          <EntitySet Name="Friends" EntityType="data_blogModel.Friend" />
+          <EntitySet Name="LoaiDanhmucs" EntityType="data_blogModel.LoaiDanhmuc" />
+          <AssociationSet Name="FK__Blogs__Blogdanhm__6477ECF3" Association="data_blogModel.FK__Blogs__Blogdanhm__6477ECF3">
+            <End Role="Danhmuc" EntitySet="Danhmucs" />
+            <End Role="Blog" EntitySet="Blogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoaiDanhmuc" Association="data_blogModel.FK_LoaiDanhmuc">
+            <End Role="LoaiDanhmuc" EntitySet="LoaiDanhmucs" />
+            <End Role="Danhmuc" EntitySet="Danhmucs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Friends__UserId__6EF57B66" Association="data_blogModel.FK__Friends__UserId__6EF57B66">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Friend" EntitySet="Friends" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Danhmuc">
+          <Key>
+            <PropertyRef Name="DanhmucId" />
+          </Key>
+          <Property Name="DanhmucId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenDanhmuc" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MaDanhmuc" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IdLoaiDanhmuc" Type="Int32" />
+          <NavigationProperty Name="Blogs" Relationship="data_blogModel.FK__Blogs__Blogdanhm__6477ECF3" FromRole="Danhmuc" ToRole="Blog" />
+          <NavigationProperty Name="LoaiDanhmuc" Relationship="data_blogModel.FK_LoaiDanhmuc" FromRole="Danhmuc" ToRole="LoaiDanhmuc" />
+        </EntityType>
+        <EntityType Name="Friend">
+          <Key>
+            <PropertyRef Name="FriendId" />
+          </Key>
+          <Property Name="FriendId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="FriendUserId" Type="Int32" />
+          <Property Name="FriendUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="data_blogModel.FK__Friends__UserId__6EF57B66" FromRole="Friend" ToRole="User" />
+        </EntityType>
+        <EntityType Name="LoaiDanhmuc">
+          <Key>
+            <PropertyRef Name="LoaiDanhmucId" />
+          </Key>
+          <Property Name="LoaiDanhmucId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenLoai" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MaLoai" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Danhmucs" Relationship="data_blogModel.FK_LoaiDanhmuc" FromRole="LoaiDanhmuc" ToRole="Danhmuc" />
+        </EntityType>
+        <Association Name="FK__Blogs__Blogdanhm__6477ECF3">
+          <End Type="data_blogModel.Danhmuc" Role="Danhmuc" Multiplicity="0..1" />
+          <End Type="data_blogModel.Blog" Role="Blog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Danhmuc">
+              <PropertyRef Name="DanhmucId" />
+            </Principal>
+            <Dependent Role="Blog">
+              <PropertyRef Name="Blogdanhmuc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoaiDanhmuc">
+          <End Type="data_blogModel.LoaiDanhmuc" Role="LoaiDanhmuc" Multiplicity="0..1" />
+          <End Type="data_blogModel.Danhmuc" Role="Danhmuc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiDanhmuc">
+              <PropertyRef Name="LoaiDanhmucId" />
+            </Principal>
+            <Dependent Role="Danhmuc">
+              <PropertyRef Name="IdLoaiDanhmuc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Friends__UserId__6EF57B66">
+          <End Type="data_blogModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="data_blogModel.Friend" Role="Friend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Friend">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -492,34 +459,6 @@
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Content" ColumnName="Content" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Danhmucs">
-            <EntityTypeMapping TypeName="data_blogModel.Danhmuc">
-              <MappingFragment StoreEntitySet="Danhmuc">
-                <ScalarProperty Name="DanhmucId" ColumnName="DanhmucId" />
-                <ScalarProperty Name="TenDanhmuc" ColumnName="TenDanhmuc" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Friends">
-            <EntityTypeMapping TypeName="data_blogModel.Friend">
-              <MappingFragment StoreEntitySet="Friends">
-                <ScalarProperty Name="FriendId" ColumnName="FriendId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="FriendUserId" ColumnName="FriendUserId" />
-                <ScalarProperty Name="FriendUrl" ColumnName="FriendUrl" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="LoaiDanhmucs">
-            <EntityTypeMapping TypeName="data_blogModel.LoaiDanhmuc">
-              <MappingFragment StoreEntitySet="LoaiDanhmuc">
-                <ScalarProperty Name="LoaiDanhmucId" ColumnName="LoaiDanhmucId" />
-                <ScalarProperty Name="DanhmucId" ColumnName="DanhmucId" />
-                <ScalarProperty Name="TenLoai" ColumnName="TenLoai" />
-                <ScalarProperty Name="MaLoai" ColumnName="MaLoai" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -556,6 +495,35 @@
                 <ScalarProperty Name="Bio" ColumnName="Bio" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Danhmucs">
+            <EntityTypeMapping TypeName="data_blogModel.Danhmuc">
+              <MappingFragment StoreEntitySet="Danhmuc">
+                <ScalarProperty Name="IdLoaiDanhmuc" ColumnName="IdLoaiDanhmuc" />
+                <ScalarProperty Name="MaDanhmuc" ColumnName="MaDanhmuc" />
+                <ScalarProperty Name="TenDanhmuc" ColumnName="TenDanhmuc" />
+                <ScalarProperty Name="DanhmucId" ColumnName="DanhmucId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Friends">
+            <EntityTypeMapping TypeName="data_blogModel.Friend">
+              <MappingFragment StoreEntitySet="Friends">
+                <ScalarProperty Name="FriendUrl" ColumnName="FriendUrl" />
+                <ScalarProperty Name="FriendUserId" ColumnName="FriendUserId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FriendId" ColumnName="FriendId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoaiDanhmucs">
+            <EntityTypeMapping TypeName="data_blogModel.LoaiDanhmuc">
+              <MappingFragment StoreEntitySet="LoaiDanhmuc">
+                <ScalarProperty Name="MaLoai" ColumnName="MaLoai" />
+                <ScalarProperty Name="TenLoai" ColumnName="TenLoai" />
+                <ScalarProperty Name="LoaiDanhmucId" ColumnName="LoaiDanhmucId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

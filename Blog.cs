@@ -29,9 +29,9 @@ namespace BTLBlog
         public Nullable<int> Bloglike { get; set; }
         public Nullable<int> BlogComments { get; set; }
     
-        public virtual Danhmuc Danhmuc { get; set; }
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comments { get; set; }
+        public virtual Danhmuc Danhmuc { get; set; }
     }
 }

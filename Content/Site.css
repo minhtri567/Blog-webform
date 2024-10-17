@@ -108,6 +108,10 @@ header.navbar{
 .blog-nav .navbar-right > a:hover {
     color: #fff;
 }
-.blog-nav .dropdown-menu a {
-    color: #212529;
+.blog-nav a.dropdown-item {
+    color: #212529 !important;
+}
+
+.ad-container-dm .ad-table-data {
+
 }

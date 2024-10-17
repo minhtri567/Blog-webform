@@ -33,6 +33,15 @@
                 <div class="collapse navbar-collapse d-sm-inline-flex justify-content-end">
                     <ul class="navbar-nav flex-grow-1 navbar-center">
                         <li class="nav-item"><a class="nav-link" href="~/Adminhome">Home</a></li>
+                        <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Quản trị hệ thống
+                          </a>
+                          <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="Adminloaidanhmuc">Quản lý loại danh muc</a></li>
+                            <li><a class="dropdown-item" href="#">Quản lý danh mục</a></li>
+                          </ul>
+                        </li>
                     </ul>
                     <div class="navbar-right">
                         <asp:PlaceHolder ID="phNotLoggedIn" runat="server">

@@ -14,11 +14,17 @@ namespace BTLBlog
     
     public partial class LoaiDanhmuc
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public LoaiDanhmuc()
+        {
+            this.Danhmucs = new HashSet<Danhmuc>();
+        }
+    
         public int LoaiDanhmucId { get; set; }
-        public Nullable<int> DanhmucId { get; set; }
         public string TenLoai { get; set; }
         public string MaLoai { get; set; }
     
-        public virtual Danhmuc Danhmuc { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Danhmuc> Danhmucs { get; set; }
     }
 }

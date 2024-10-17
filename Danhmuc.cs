@@ -18,15 +18,15 @@ namespace BTLBlog
         public Danhmuc()
         {
             this.Blogs = new HashSet<Blog>();
-            this.LoaiDanhmucs = new HashSet<LoaiDanhmuc>();
         }
     
         public int DanhmucId { get; set; }
         public string TenDanhmuc { get; set; }
+        public string MaDanhmuc { get; set; }
+        public Nullable<int> IdLoaiDanhmuc { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Blog> Blogs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LoaiDanhmuc> LoaiDanhmucs { get; set; }
+        public virtual LoaiDanhmuc LoaiDanhmuc { get; set; }
     }
 }

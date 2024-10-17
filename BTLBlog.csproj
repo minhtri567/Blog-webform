@@ -110,6 +110,7 @@
     <Content Include="About.aspx" />
     <Content Include="AccountInfo.aspx" />
     <Content Include="Adminhome.aspx" />
+    <Content Include="Adminloaidanhmuc.aspx" />
     <Content Include="BlogDBModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>BlogDBModel.edmx</DependentUpon>
@@ -253,6 +254,13 @@
     </Compile>
     <Compile Include="Adminhome.aspx.designer.cs">
       <DependentUpon>Adminhome.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Adminloaidanhmuc.aspx.cs">
+      <DependentUpon>Adminloaidanhmuc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Adminloaidanhmuc.aspx.designer.cs">
+      <DependentUpon>Adminloaidanhmuc.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">

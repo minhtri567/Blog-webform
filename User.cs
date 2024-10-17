@@ -19,9 +19,8 @@ namespace BTLBlog
         {
             this.Blogs = new HashSet<Blog>();
             this.Comments = new HashSet<Comment>();
-            this.Friends = new HashSet<Friend>();
-            this.Friends1 = new HashSet<Friend>();
             this.Preferences = new HashSet<Preference>();
+            this.Friends = new HashSet<Friend>();
         }
     
         public int UserId { get; set; }
@@ -39,10 +38,8 @@ namespace BTLBlog
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Friend> Friends { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Friend> Friends1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Preference> Preferences { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Friend> Friends { get; set; }
     }
 }
