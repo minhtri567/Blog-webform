@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -16,6 +17,11 @@ namespace BTLBlog
                 LoadData();
                 LoadLoaiDanhmucCha();
             }
+        }
+        protected void btn_clear_Click(object sender, EventArgs e)
+        {
+            // Gọi phương thức LoadData để làm mới dữ liệu trong GridView
+            LoadData();
         }
         private void LoadLoaiDanhmucCha()
         {
@@ -92,6 +98,7 @@ namespace BTLBlog
                     var danhmuc = context.Danhmucs.SingleOrDefault(d => d.DanhmucId == id);
                     if (danhmuc != null)
                     {
+                        hfDanhmucId.Value = Convert.ToString(danhmuc.DanhmucId);
                         txtSuaTenLoai.Text = danhmuc.TenDanhmuc;
                         txtSuaMaLoai.Text = danhmuc.MaDanhmuc;
                         ddlSuaLoaiDanhmucCha.SelectedValue = danhmuc.IdLoaiDanhmuc.ToString();
@@ -159,8 +166,8 @@ namespace BTLBlog
                 if (danhmuc != null)
                 {
                     // Cập nhật thông tin danh mục
-                    danhmuc.TenDanhmuc = txtTenLoai.Text;
-                    danhmuc.MaDanhmuc = txtMaLoai.Text;
+                    danhmuc.TenDanhmuc = txtSuaTenLoai.Text;
+                    danhmuc.MaDanhmuc = txtSuaMaLoai.Text;
                     danhmuc.IdLoaiDanhmuc = int.Parse(ddlLoaiDanhmucCha.SelectedValue);
 
                     context.SaveChanges();

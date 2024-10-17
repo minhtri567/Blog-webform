@@ -105,6 +105,15 @@ namespace BTLBlog
         protected global::System.Web.UI.WebControls.View ViewSua;
 
         /// <summary>
+        /// hLoaiDanhmucId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hLoaiDanhmucId;
+
+        /// <summary>
         /// lblSuaTenLoai control.
         /// </summary>
         /// <remarks>

@@ -5,7 +5,11 @@
             <asp:View ID="ViewDanhSach" runat="server">
                 <asp:GridView ID="gvLoaiDanhmuc" runat="server" AutoGenerateColumns="false" CssClass="table table-striped ad-table-data" OnRowCommand="gvLoaiDanhmuc_RowCommand">
                     <Columns>
-                        <asp:BoundField DataField="LoaiDanhmucId" HeaderText="ID" />
+                         <asp:TemplateField HeaderText="STT">
+                            <ItemTemplate>
+                                <%# Container.DataItemIndex + 1 %>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:BoundField DataField="TenLoai" HeaderText="Tên Loại" />
                         <asp:BoundField DataField="MaLoai" HeaderText="Mã Loại" />
                         <asp:TemplateField>
@@ -33,6 +37,7 @@
             </asp:View>
             <asp:View ID="ViewSua" runat="server">
                 <h2>Sửa Loại danh mục</h2>
+                <asp:HiddenField ID="hLoaiDanhmucId" runat="server" />
                 <asp:Label ID="lblSuaTenLoai" runat="server" Text="Tên Loại: "></asp:Label>
                 <asp:TextBox ID="txtSuaTenLoai" runat="server"></asp:TextBox>
                 <asp:RequiredFieldValidator ControlToValidate="txtSuaTenLoai" ErrorMessage="Tên loại không được để trống" runat="server" />

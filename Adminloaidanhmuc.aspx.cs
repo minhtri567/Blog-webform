@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -39,6 +40,7 @@ namespace BTLBlog
                     var loaiDanhmuc = context.LoaiDanhmucs.SingleOrDefault(ld => ld.LoaiDanhmucId == id);
                     if (loaiDanhmuc != null)
                     {
+                        hLoaiDanhmucId.Value = Convert.ToString(loaiDanhmuc.LoaiDanhmucId);
                         txtSuaTenLoai.Text = loaiDanhmuc.TenLoai;
                         txtSuaMaLoai.Text = loaiDanhmuc.MaLoai;
                     }
@@ -93,35 +95,32 @@ namespace BTLBlog
         {
             using (var context = new BlogDBEntities())
             {
-                // Kiểm tra xem LoaiDanhmuc có tồn tại với TenLoai hoặc MaLoai này chưa
-                var dataExist = context.LoaiDanhmucs.Any(l => l.MaLoai == txtMaLoai.Text || l.TenLoai == txtTenLoai.Text);
+                int id = Convert.ToInt32(hLoaiDanhmucId.Value);
 
-                if (dataExist)
-                {
-                    string script = "<script>Custom.Mytoast('Loại danh mục đã tồn tại!', '/images/error.svg');</script>";
-                    ClientScript.RegisterStartupScript(this.GetType(), "ShowToast", script);
-                }
-                else
-                {
-                    // Nếu không tồn tại, thêm mới
-                    var loaiDanhmuc = new LoaiDanhmuc
-                    {
-                        TenLoai = txtTenLoai.Text,
-                        MaLoai = txtMaLoai.Text
-                    };
+                var danhmuc = context.LoaiDanhmucs.SingleOrDefault(d => d.LoaiDanhmucId == id);
 
-                    context.LoaiDanhmucs.Add(loaiDanhmuc);
+                if (danhmuc != null)
+                {
+                    danhmuc.TenLoai = txtSuaTenLoai.Text;
+                    danhmuc.MaLoai = txtSuaMaLoai.Text;
+
                     context.SaveChanges();
 
                     // Cập nhật lại GridView
                     LoadData();
 
                     // Hiển thị thông báo thành công
-                    string script = "<script>Custom.Mytoast('Thêm thành công!', '/images/success.svg');</script>";
+                    string script = "<script>Custom.Mytoast('Cập nhật thành công!', '/images/success.svg');</script>";
                     ClientScript.RegisterStartupScript(this.GetType(), "ShowToast", script);
 
                     // Chuyển về View danh sách
                     mvLoaiDanhmuc.ActiveViewIndex = 0;
+                }
+                else
+                {
+                    // Trường hợp danh mục không tồn tại
+                    string script = "<script>Custom.Mytoast('Danh mục không tồn tại!', '/images/error.svg');</script>";
+                    ClientScript.RegisterStartupScript(this.GetType(), "ShowToast", script);
                 }
             }
         }

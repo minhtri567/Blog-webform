@@ -13,7 +13,14 @@
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="TenLoai" HeaderText="Tên Loại" />
-                            <asp:ButtonField Text="Chọn" CommandName="Select" ButtonType="Button" />
+                            <asp:TemplateField HeaderText="Thao tác">
+                                <ItemTemplate>
+                                    <asp:Button ID="btnChon" runat="server" Text="Chọn" CommandName="Select" ButtonType="Button" />
+                                </ItemTemplate>
+                                <HeaderTemplate>
+                                    <asp:Button ID="btn_clear" runat="server" Text="Clear" OnClick="btn_clear_Click" />
+                                </HeaderTemplate>
+                            </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
                 </div>
