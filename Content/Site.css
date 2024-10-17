@@ -115,3 +115,10 @@ header.navbar{
 .ad-container-dm .ad-table-data {
 
 }
+
+.ckeditor .ck-content {
+    min-height: 400px;
+}
+.container-newblog .form-control {
+    width: 100%;
+}

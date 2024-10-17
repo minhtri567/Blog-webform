@@ -17,6 +17,8 @@
           <Property Name="BlogCreatedDate" Type="datetime" />
           <Property Name="Bloglike" Type="int" />
           <Property Name="BlogComments" Type="int" />
+          <Property Name="seo" Type="nvarchar" MaxLength="250" />
+          <Property Name="BlogTitleImg" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="Comments">
           <Key>
@@ -228,6 +230,8 @@
           <NavigationProperty Name="User" Relationship="Self.FK__Blogs__UserId__6383C8BA" FromRole="Blogs" ToRole="Users" />
           <NavigationProperty Name="Comments" Relationship="Self.FK__Comments__BlogId__6A30C649" FromRole="Blogs" ToRole="Comments" />
           <NavigationProperty Name="Danhmuc" Relationship="data_blogModel.FK__Blogs__Blogdanhm__6477ECF3" FromRole="Blog" ToRole="Danhmuc" />
+          <Property Name="seo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="BlogTitleImg" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -440,6 +444,8 @@
           <EntitySetMapping Name="Blogs">
             <EntityTypeMapping TypeName="data_blogModel.Blog">
               <MappingFragment StoreEntitySet="Blogs">
+                <ScalarProperty Name="BlogTitleImg" ColumnName="BlogTitleImg" />
+                <ScalarProperty Name="seo" ColumnName="seo" />
                 <ScalarProperty Name="BlogId" ColumnName="BlogId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Blogdanhmuc" ColumnName="Blogdanhmuc" />

@@ -28,6 +28,8 @@ namespace BTLBlog
         public Nullable<System.DateTime> BlogCreatedDate { get; set; }
         public Nullable<int> Bloglike { get; set; }
         public Nullable<int> BlogComments { get; set; }
+        public string seo { get; set; }
+        public string BlogTitleImg { get; set; }
     
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

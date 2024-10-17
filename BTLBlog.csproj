@@ -189,6 +189,7 @@
     <Content Include="images\success.svg" />
     <Content Include="images\user.png" />
     <Content Include="Login.aspx" />
+    <Content Include="New-blog.aspx" />
     <Content Include="Register.aspx" />
     <EntityDeploy Include="BlogDBModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -206,6 +207,7 @@
     <Content Include="Content\font-awesome\webfonts\fa-solid-900.woff2" />
     <Content Include="Content\font-awesome\webfonts\fa-v4compatibility.ttf" />
     <Content Include="Content\font-awesome\webfonts\fa-v4compatibility.woff2" />
+    <Content Include="Scripts\ckeditor\ckeditor.js" />
     <Content Include="Scripts\MyScript.js" />
     <Content Include="Scripts\WebForms\DetailsView.js" />
     <Content Include="Scripts\WebForms\Focus.js" />
@@ -339,6 +341,13 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="New-blog.aspx.cs">
+      <DependentUpon>New-blog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="New-blog.aspx.designer.cs">
+      <DependentUpon>New-blog.aspx</DependentUpon>
     </Compile>
     <Compile Include="Preference.cs">
       <DependentUpon>BlogDBModel.tt</DependentUpon>
