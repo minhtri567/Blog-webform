@@ -18,6 +18,11 @@ namespace BTLBlog
                 "blog/{seo}",            
                 "~/BlogDetails.aspx"
             );
+            routes.MapPageRoute(
+                "BlogCateRoute",
+                "the-loai/{seo}",
+                "~/Category.aspx"
+            );
         }
     }
 }

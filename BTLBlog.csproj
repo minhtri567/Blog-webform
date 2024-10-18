@@ -123,6 +123,7 @@
       <LastGenOutput>BlogDBModel.cs</LastGenOutput>
     </Content>
     <Content Include="BlogDetails.aspx" />
+    <Content Include="Category.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap\css\bootstrap-grid.css" />
     <Content Include="Content\bootstrap\css\bootstrap-grid.min.css" />
@@ -314,6 +315,13 @@
     </Compile>
     <Compile Include="BlogDetails.aspx.designer.cs">
       <DependentUpon>BlogDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Category.aspx.cs">
+      <DependentUpon>Category.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Category.aspx.designer.cs">
+      <DependentUpon>Category.aspx</DependentUpon>
     </Compile>
     <Compile Include="Comment.cs">
       <DependentUpon>BlogDBModel.tt</DependentUpon>

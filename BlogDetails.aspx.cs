@@ -39,7 +39,14 @@ namespace BTLBlog
 
                     var Ldanhmuc = context.Danhmucs
                    .Where(d => d.BlogDanhmucs.Any(bd => bd.BlogId == blog.BlogId))
+                   .Select(d => new {
+                       d.TenDanhmuc,
+                       d.MaDanhmuc
+                   })
                    .ToList();
+
+                    rptDanhMuc.DataSource = Ldanhmuc;
+                    rptDanhMuc.DataBind();
 
                     ltBlogTitle.Text = "<h1>" + blog.BlogTitle + "</h1>";
                     ltBlogContent.Text = HttpUtility.HtmlDecode(blog.BlogContent);
