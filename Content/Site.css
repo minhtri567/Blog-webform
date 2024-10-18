@@ -167,3 +167,8 @@ header.navbar{
     border-radius: 50%;
     object-fit: cover;
 }
+
+.cotainer-blog {
+    max-width: 980px;
+    margin : auto;
+}

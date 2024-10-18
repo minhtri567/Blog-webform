@@ -37,7 +37,7 @@
                                         </div>
                                     </div>
                                     <div class="item-title">
-                                        <a class="item-link" href="BlogDetails.aspx?BlogId=<%= blog.BlogId %>">
+                                        <a class="item-link" href="<%= ResolveUrl("~/blog/" + blog.seo) %>">
                                             <div class="item-text" style="font-size: 26px;">
                                                 <p><%= blog.BlogTitle %></p>
                                             </div>

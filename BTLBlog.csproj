@@ -122,6 +122,7 @@
       <DependentUpon>BlogDBModel.edmx</DependentUpon>
       <LastGenOutput>BlogDBModel.cs</LastGenOutput>
     </Content>
+    <Content Include="BlogDetails.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap\css\bootstrap-grid.css" />
     <Content Include="Content\bootstrap\css\bootstrap-grid.min.css" />
@@ -194,6 +195,7 @@
     <Content Include="images\user.png" />
     <Content Include="Login.aspx" />
     <Content Include="New-blog.aspx" />
+    <Content Include="NotFound.aspx" />
     <Content Include="Register.aspx" />
     <EntityDeploy Include="BlogDBModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -239,7 +241,6 @@
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
-    <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountInfo.aspx.cs">
@@ -307,6 +308,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BlogDBModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="BlogDetails.aspx.cs">
+      <DependentUpon>BlogDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BlogDetails.aspx.designer.cs">
+      <DependentUpon>BlogDetails.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Comment.cs">
       <DependentUpon>BlogDBModel.tt</DependentUpon>
     </Compile>
@@ -357,6 +365,13 @@
     <Compile Include="New-blog.aspx.designer.cs">
       <DependentUpon>New-blog.aspx</DependentUpon>
     </Compile>
+    <Compile Include="NotFound.aspx.cs">
+      <DependentUpon>NotFound.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NotFound.aspx.designer.cs">
+      <DependentUpon>NotFound.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Preference.cs">
       <DependentUpon>BlogDBModel.tt</DependentUpon>
     </Compile>
@@ -374,13 +389,6 @@
     </Compile>
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Site.Mobile.Master.cs">
-      <DependentUpon>Site.Mobile.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Site.Mobile.Master.designer.cs">
-      <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
     <Compile Include="sysdiagram.cs">
       <DependentUpon>BlogDBModel.tt</DependentUpon>

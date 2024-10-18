@@ -13,6 +13,11 @@ namespace BTLBlog
             var settings = new FriendlyUrlSettings();
             settings.AutoRedirectMode = RedirectMode.Permanent;
             routes.EnableFriendlyUrls(settings);
+            routes.MapPageRoute(
+                "BlogRoute",              
+                "blog/{seo}",            
+                "~/BlogDetails.aspx"
+            );
         }
     }
 }
