@@ -4,6 +4,9 @@
     <h2>Thông tin tài khoản</h2>
     
     <div class="account-info">
+        <div class="user-img">
+            <asp:Image ID="Userimg" runat="server" />
+        </div>
         <p><strong>Tên người dùng:</strong> <asp:Label ID="lblUsername" runat="server" /></p>
         <p><strong>Email:</strong> <asp:Label ID="lblEmail" runat="server" /></p>
         <p><strong>Ngày đăng ký:</strong> <asp:Label ID="lblCreatedDate" runat="server" /></p>

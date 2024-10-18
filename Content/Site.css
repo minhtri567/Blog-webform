@@ -158,3 +158,12 @@ header.navbar{
     border-radius: 6px;
     margin-top: 8px;
 }
+.user-img {
+    text-align : center;
+}
+.user-img img {
+    width: 53px;
+    height: 53px;
+    border-radius: 50%;
+    object-fit: cover;
+}

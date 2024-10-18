@@ -98,7 +98,7 @@ namespace BTLBlog
         {
             if (fileUpload.HasFile)
             {
-                string folderPath = Server.MapPath("~/images/blogs/");
+                string folderPath = Server.MapPath("images/blogs/");
                 if (!Directory.Exists(folderPath))
                 {
                     Directory.CreateDirectory(folderPath);
@@ -109,7 +109,7 @@ namespace BTLBlog
 
                 fileUpload.SaveAs(fullPath);
 
-                return "~/images/blog/" + fileName;
+                return "images/blogs/" + fileName;
             }
             return null;
         }

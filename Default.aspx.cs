@@ -11,7 +11,13 @@ namespace BTLBlog
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+        }
+        public List<Blog> LoadBlogs()
+        {
+            using (var context = new BlogDBEntities())
+            {
+                return context.Blogs.ToList();
+            }
         }
     }
 }

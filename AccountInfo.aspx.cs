@@ -23,6 +23,7 @@ namespace BTLBlog
 
                         if (user != null)
                         {
+                            Userimg.ImageUrl = user.ProfilePicture;
                             lblUsername.Text = user.Username;
                             lblEmail.Text = user.Email;
                             lblCreatedDate.Text = user.CreatedDate.Value.ToString("dd/MM/yyyy");

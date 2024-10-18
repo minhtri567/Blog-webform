@@ -30,7 +30,9 @@
                     </button>
                     <div class="collapse navbar-collapse d-sm-inline-flex justify-content-end">
                         <ul class="navbar-nav flex-grow-1 navbar-center">
-                            <li class="nav-item"><a class="nav-link" runat="server" href="~/">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" runat="server" href="~/">Trang chủ</a></li>
+                            <li class="nav-item"><a class="nav-link" runat="server" href="#">Blog của tôi</a></li>
+                            <li class="nav-item"><a class="nav-link" runat="server" href="#">Bạn bè</a></li>
                         </ul>
                         <div class="navbar-right">
                             <asp:PlaceHolder ID="phNotLoggedIn" runat="server">
