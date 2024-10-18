@@ -287,6 +287,9 @@
     <Compile Include="Blog.cs">
       <DependentUpon>BlogDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="BlogDanhmuc.cs">
+      <DependentUpon>BlogDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="BlogDBModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

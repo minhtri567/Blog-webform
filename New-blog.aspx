@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="New-blog.aspx.cs" Inherits="BTLBlog.new_blog" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="New-blog.aspx.cs" Inherits="BTLBlog.new_blog" ValidateRequest="false" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <asp:Panel ID="pnlCreateBlog" CssClass="container-newblog" runat="server">
         <h2>Tạo bài viết mới</h2>
@@ -10,10 +10,13 @@
             <label class="form-text">Hình ảnh tiêu đề:</label>
             <asp:FileUpload ID="fileBlogTitleImg" runat="server" CssClass="form-control file-upload" />
             <div id="container-imgPreview" style="display:none;"">
-                <img id="imgPreview" src="#" alt="Preview Image" class="img-preview" />
+                <div class="popover-arrow" style="position: absolute; left: 0px; transform: translate(66px, 0px);"></div>
+                <div class="popover-content">
+                    <img id="imgPreview" src="#" alt="Preview Image" class="img-preview" />
+                </div>
             </div>
-            
        </div>
+
         <div class="container-input">
             <label class="form-text">Danh mục:</label>
             <asp:ListBox ID="ddlBlogDanhmuc" runat="server" CssClass="selectize" SelectionMode="Multiple">

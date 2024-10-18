@@ -42,22 +42,57 @@ namespace BTLBlog
                 var blog = new Blog
                 {
                     BlogTitle = txtBlogTitle.Text,
-                    BlogContent = txtBlogContent.Text,
+                    BlogContent = HttpUtility.HtmlEncode(txtBlogContent.Text),
                     BlogCreatedDate = DateTime.Now,
                     summary_ct = txtsumaruct.Text,
+                    seo = GenerateSeo(txtBlogTitle.Text),
+                    Bloglike = 0,
+                    BlogComments = 0,
                     UserId = (int)Session["UserId"]
                 };
 
-                // Nếu chọn nhiều danh mục, bạn cần xử lý tùy theo cấu trúc của bảng Blog và Danhmuc.
-                // Ví dụ: Lưu các DanhmucId đã chọn trong mối quan hệ riêng biệt.
+                string imagePath = SaveBlogTitleImage(fileBlogTitleImg);
+                blog.BlogTitleImg = imagePath;
 
                 context.Blogs.Add(blog);
+                context.SaveChanges();
+
+                foreach (ListItem item in ddlBlogDanhmuc.Items)
+                {
+                    if (item.Selected)
+                    {
+                        BlogDanhmuc blogDanhmuc = new BlogDanhmuc
+                        {
+                            BlogId = blog.BlogId,
+                            DanhmucId = Convert.ToInt32(item.Value)
+                        };
+                        context.BlogDanhmuc.Add(blogDanhmuc);
+                    }
+                }
+
                 context.SaveChanges();
 
                 // Hiển thị thông báo thành công
                 string script = "<script>Custom.Mytoast('Lưu bài viết thành công!', '/images/success.svg');</script>";
                 ClientScript.RegisterStartupScript(this.GetType(), "ShowToast", script);
             }
+        }
+        public static string GenerateSeo(string title)
+        {
+            // Chuyển đổi về chữ thường
+            string seoTitle = title.ToLower();
+
+            // Thay thế khoảng trắng bằng dấu gạch ngang
+            seoTitle = seoTitle.Replace(" ", "-");
+
+            // Loại bỏ các ký tự không hợp lệ
+            seoTitle = System.Text.RegularExpressions.Regex.Replace(seoTitle, @"[^a-z0-9\-]", "");
+
+            // Loại bỏ các dấu gạch ngang liên tiếp
+            seoTitle = System.Text.RegularExpressions.Regex.Replace(seoTitle, @"-+", "-");
+
+            // Trả về chuỗi SEO đã chuẩn hóa
+            return seoTitle;
         }
         private string SaveBlogTitleImage(FileUpload fileUpload)
         {

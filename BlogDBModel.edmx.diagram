@@ -5,20 +5,22 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="f3b99a0383574fde924d1bc520f74fe1" Name="Diagram1">
-        <EntityTypeShape EntityType="data_blogModel.Blog" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="data_blogModel.Comment" Width="1.5" PointX="5.25" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="data_blogModel.Preference" Width="1.5" PointX="3.75" PointY="9.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="data_blogModel.User" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
-        <AssociationConnector Association="data_blogModel.FK__Blogs__UserId__6383C8BA" ManuallyRouted="false" />
-        <AssociationConnector Association="data_blogModel.FK__Comments__BlogId__6A30C649" ManuallyRouted="false" />
-        <AssociationConnector Association="data_blogModel.FK__Comments__UserId__6B24EA82" ManuallyRouted="false" />
-        <AssociationConnector Association="data_blogModel.FK__Preferenc__UserI__72C60C4A" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="data_blogModel.Danhmuc" Width="1.5" PointX="3" PointY="0.875" />
-        <EntityTypeShape EntityType="data_blogModel.Friend" Width="1.5" PointX="3.375" PointY="14.875" />
-        <EntityTypeShape EntityType="data_blogModel.LoaiDanhmuc" Width="1.5" PointX="0.75" PointY="1.125" />
-        <AssociationConnector Association="data_blogModel.FK__Blogs__Blogdanhm__6477ECF3" />
+        <EntityTypeShape EntityType="data_blogModel.BlogDanhmuc" Width="1.5" PointX="5" PointY="3.375" />
+        <EntityTypeShape EntityType="data_blogModel.Blog" Width="1.5" PointX="3" PointY="2.25" />
+        <EntityTypeShape EntityType="data_blogModel.Comment" Width="1.5" PointX="5.375" PointY="0.625" />
+        <EntityTypeShape EntityType="data_blogModel.Danhmuc" Width="1.5" PointX="6.75" PointY="3.375" />
+        <EntityTypeShape EntityType="data_blogModel.Friend" Width="1.5" PointX="2.875" PointY="6.875" />
+        <EntityTypeShape EntityType="data_blogModel.LoaiDanhmuc" Width="1.5" PointX="8.625" PointY="3.375" />
+        <EntityTypeShape EntityType="data_blogModel.Preference" Width="1.5" PointX="0.5" PointY="6.875" />
+        <EntityTypeShape EntityType="data_blogModel.User" Width="1.5" PointX="0.75" PointY="2.375" />
+        <AssociationConnector Association="data_blogModel.FK_BlogDanhmuc_Blog" />
+        <AssociationConnector Association="data_blogModel.FK_BlogDanhmuc_Danhmuc" />
+        <AssociationConnector Association="data_blogModel.FK__Blogs__UserId__6383C8BA" />
+        <AssociationConnector Association="data_blogModel.FK__Comments__BlogId__6A30C649" />
+        <AssociationConnector Association="data_blogModel.FK__Comments__UserId__6B24EA82" />
         <AssociationConnector Association="data_blogModel.FK_LoaiDanhmuc" />
         <AssociationConnector Association="data_blogModel.FK__Friends__UserId__6EF57B66" />
+        <AssociationConnector Association="data_blogModel.FK__Preferenc__UserI__72C60C4A" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

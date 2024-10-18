@@ -126,15 +126,35 @@ header.navbar{
 }
 #container-imgPreview{
     position : absolute;
-    aspect-ratio :auto;
     z-index : 10;
     left :0;
     max-width : 300px;
 }
 .img-preview {
-    aspect-ratio: auto;
+    object-fit: cover;
+    width: -webkit-fill-available;
 }
-
-.file-upload:hover > #imgPreview {
+.popover-arrow::before , .popover-arrow::after {
+    position: absolute;
     display: block;
+    content: "";
+    border-color: transparent;
+    border-style: solid;
+}
+.popover-arrow::before {
+    top: 0;
+    border-width: 0 .5rem .5rem .5rem;
+    border-bottom-color: rgba(0, 0, 0, .25);
+}
+.popover-arrow::after {
+    top: 1px;
+    border-width: 0 .5rem .5rem .5rem;
+    border-bottom-color: #fff;
+}
+.popover-content {
+    border: 1px solid #8b8b8b;
+    padding: 10px;
+    background-color: white;
+    border-radius: 6px;
+    margin-top: 8px;
 }

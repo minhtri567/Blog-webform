@@ -17,6 +17,7 @@ namespace BTLBlog
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Blog()
         {
+            this.BlogDanhmucs = new HashSet<BlogDanhmuc>();
             this.Comments = new HashSet<Comment>();
         }
     
@@ -32,9 +33,10 @@ namespace BTLBlog
         public string BlogTitleImg { get; set; }
         public string summary_ct { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BlogDanhmuc> BlogDanhmucs { get; set; }
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comments { get; set; }
-        public virtual Danhmuc Danhmuc { get; set; }
     }
 }

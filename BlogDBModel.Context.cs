@@ -25,13 +25,14 @@ namespace BTLBlog
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<BlogDanhmuc> BlogDanhmucs { get; set; }
         public virtual DbSet<Blog> Blogs { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
-        public virtual DbSet<Preference> Preferences { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Danhmuc> Danhmucs { get; set; }
         public virtual DbSet<Friend> Friends { get; set; }
         public virtual DbSet<LoaiDanhmuc> LoaiDanhmucs { get; set; }
+        public virtual DbSet<Preference> Preferences { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

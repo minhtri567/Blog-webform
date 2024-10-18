@@ -5,6 +5,14 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="data_blogModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BlogDanhmuc">
+          <Key>
+            <PropertyRef Name="BlogDanhmucId" />
+          </Key>
+          <Property Name="BlogDanhmucId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BlogId" Type="int" />
+          <Property Name="DanhmucId" Type="int" />
+        </EntityType>
         <EntityType Name="Blogs">
           <Key>
             <PropertyRef Name="BlogId" />
@@ -90,18 +98,6 @@
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="UpdatedAt" Type="datetime" />
         </EntityType>
-        <Association Name="FK__Blogs__Blogdanhm__6477ECF3">
-          <End Role="Danhmuc" Type="Self.Danhmuc" Multiplicity="0..1" />
-          <End Role="Blogs" Type="Self.Blogs" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Danhmuc">
-              <PropertyRef Name="DanhmucId" />
-            </Principal>
-            <Dependent Role="Blogs">
-              <PropertyRef Name="Blogdanhmuc" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Blogs__UserId__6383C8BA">
           <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
           <End Role="Blogs" Type="Self.Blogs" Multiplicity="*" />
@@ -162,6 +158,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_BlogDanhmuc_Blog">
+          <End Role="Blogs" Type="Self.Blogs" Multiplicity="0..1" />
+          <End Role="BlogDanhmuc" Type="Self.BlogDanhmuc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Blogs">
+              <PropertyRef Name="BlogId" />
+            </Principal>
+            <Dependent Role="BlogDanhmuc">
+              <PropertyRef Name="BlogId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BlogDanhmuc_Danhmuc">
+          <End Role="Danhmuc" Type="Self.Danhmuc" Multiplicity="0..1" />
+          <End Role="BlogDanhmuc" Type="Self.BlogDanhmuc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Danhmuc">
+              <PropertyRef Name="DanhmucId" />
+            </Principal>
+            <Dependent Role="BlogDanhmuc">
+              <PropertyRef Name="DanhmucId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_LoaiDanhmuc">
           <End Role="LoaiDanhmuc" Type="Self.LoaiDanhmuc" Multiplicity="0..1" />
           <End Role="Danhmuc" Type="Self.Danhmuc" Multiplicity="*" />
@@ -175,6 +195,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="data_blogModelStoreContainer">
+          <EntitySet Name="BlogDanhmuc" EntityType="Self.BlogDanhmuc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Blogs" EntityType="Self.Blogs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Danhmuc" EntityType="Self.Danhmuc" Schema="dbo" store:Type="Tables" />
@@ -183,10 +204,6 @@
           <EntitySet Name="Preferences" EntityType="Self.Preferences" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Blogs__Blogdanhm__6477ECF3" Association="Self.FK__Blogs__Blogdanhm__6477ECF3">
-            <End Role="Danhmuc" EntitySet="Danhmuc" />
-            <End Role="Blogs" EntitySet="Blogs" />
-          </AssociationSet>
           <AssociationSet Name="FK__Blogs__UserId__6383C8BA" Association="Self.FK__Blogs__UserId__6383C8BA">
             <End Role="Users" EntitySet="Users" />
             <End Role="Blogs" EntitySet="Blogs" />
@@ -207,6 +224,14 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="Preferences" EntitySet="Preferences" />
           </AssociationSet>
+          <AssociationSet Name="FK_BlogDanhmuc_Blog" Association="Self.FK_BlogDanhmuc_Blog">
+            <End Role="Blogs" EntitySet="Blogs" />
+            <End Role="BlogDanhmuc" EntitySet="BlogDanhmuc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BlogDanhmuc_Danhmuc" Association="Self.FK_BlogDanhmuc_Danhmuc">
+            <End Role="Danhmuc" EntitySet="Danhmuc" />
+            <End Role="BlogDanhmuc" EntitySet="BlogDanhmuc" />
+          </AssociationSet>
           <AssociationSet Name="FK_LoaiDanhmuc" Association="Self.FK_LoaiDanhmuc">
             <End Role="LoaiDanhmuc" EntitySet="LoaiDanhmuc" />
             <End Role="Danhmuc" EntitySet="Danhmuc" />
@@ -216,6 +241,69 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="data_blogModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityContainer Name="data_blogEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="BlogDanhmucs" EntityType="data_blogModel.BlogDanhmuc" />
+          <EntitySet Name="Blogs" EntityType="data_blogModel.Blog" />
+          <EntitySet Name="Comments" EntityType="data_blogModel.Comment" />
+          <EntitySet Name="Danhmucs" EntityType="data_blogModel.Danhmuc" />
+          <EntitySet Name="Friends" EntityType="data_blogModel.Friend" />
+          <EntitySet Name="LoaiDanhmucs" EntityType="data_blogModel.LoaiDanhmuc" />
+          <EntitySet Name="Preferences" EntityType="data_blogModel.Preference" />
+          <EntitySet Name="Users" EntityType="data_blogModel.User" />
+          <AssociationSet Name="FK_BlogDanhmuc_Blog" Association="data_blogModel.FK_BlogDanhmuc_Blog">
+            <End Role="Blog" EntitySet="Blogs" />
+            <End Role="BlogDanhmuc" EntitySet="BlogDanhmucs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BlogDanhmuc_Danhmuc" Association="data_blogModel.FK_BlogDanhmuc_Danhmuc">
+            <End Role="Danhmuc" EntitySet="Danhmucs" />
+            <End Role="BlogDanhmuc" EntitySet="BlogDanhmucs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Blogs__UserId__6383C8BA" Association="data_blogModel.FK__Blogs__UserId__6383C8BA">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Blog" EntitySet="Blogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comments__BlogId__6A30C649" Association="data_blogModel.FK__Comments__BlogId__6A30C649">
+            <End Role="Blog" EntitySet="Blogs" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comments__UserId__6B24EA82" Association="data_blogModel.FK__Comments__UserId__6B24EA82">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoaiDanhmuc" Association="data_blogModel.FK_LoaiDanhmuc">
+            <End Role="LoaiDanhmuc" EntitySet="LoaiDanhmucs" />
+            <End Role="Danhmuc" EntitySet="Danhmucs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Friends__UserId__6EF57B66" Association="data_blogModel.FK__Friends__UserId__6EF57B66">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Friend" EntitySet="Friends" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Preferenc__UserI__72C60C4A" Association="data_blogModel.FK__Preferenc__UserI__72C60C4A">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Preference" EntitySet="Preferences" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="BlogDanhmuc">
+          <Key>
+            <PropertyRef Name="BlogDanhmucId" />
+          </Key>
+          <Property Name="BlogDanhmucId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BlogId" Type="Int32" />
+          <Property Name="DanhmucId" Type="Int32" />
+          <NavigationProperty Name="Blog" Relationship="data_blogModel.FK_BlogDanhmuc_Blog" FromRole="BlogDanhmuc" ToRole="Blog" />
+          <NavigationProperty Name="Danhmuc" Relationship="data_blogModel.FK_BlogDanhmuc_Danhmuc" FromRole="BlogDanhmuc" ToRole="Danhmuc" />
+        </EntityType>
         <EntityType Name="Blog">
           <Key>
             <PropertyRef Name="BlogId" />
@@ -228,12 +316,12 @@
           <Property Name="BlogCreatedDate" Type="DateTime" Precision="3" />
           <Property Name="Bloglike" Type="Int32" />
           <Property Name="BlogComments" Type="Int32" />
-          <NavigationProperty Name="User" Relationship="Self.FK__Blogs__UserId__6383C8BA" FromRole="Blogs" ToRole="Users" />
-          <NavigationProperty Name="Comments" Relationship="Self.FK__Comments__BlogId__6A30C649" FromRole="Blogs" ToRole="Comments" />
-          <NavigationProperty Name="Danhmuc" Relationship="data_blogModel.FK__Blogs__Blogdanhm__6477ECF3" FromRole="Blog" ToRole="Danhmuc" />
           <Property Name="seo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="BlogTitleImg" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="summary_ct" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BlogDanhmucs" Relationship="data_blogModel.FK_BlogDanhmuc_Blog" FromRole="Blog" ToRole="BlogDanhmuc" />
+          <NavigationProperty Name="User" Relationship="data_blogModel.FK__Blogs__UserId__6383C8BA" FromRole="Blog" ToRole="User" />
+          <NavigationProperty Name="Comments" Relationship="data_blogModel.FK__Comments__BlogId__6A30C649" FromRole="Blog" ToRole="Comment" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -244,133 +332,9 @@
           <Property Name="UserId" Type="Int32" />
           <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Blog" Relationship="Self.FK__Comments__BlogId__6A30C649" FromRole="Comments" ToRole="Blogs" />
-          <NavigationProperty Name="User" Relationship="Self.FK__Comments__UserId__6B24EA82" FromRole="Comments" ToRole="Users" />
+          <NavigationProperty Name="Blog" Relationship="data_blogModel.FK__Comments__BlogId__6A30C649" FromRole="Comment" ToRole="Blog" />
+          <NavigationProperty Name="User" Relationship="data_blogModel.FK__Comments__UserId__6B24EA82" FromRole="Comment" ToRole="User" />
         </EntityType>
-        <EntityType Name="Preference">
-          <Key>
-            <PropertyRef Name="PreferenceId" />
-          </Key>
-          <Property Name="PreferenceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" />
-          <Property Name="Setting" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Value" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="User" Relationship="Self.FK__Preferenc__UserI__72C60C4A" FromRole="Preferences" ToRole="Users" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PasswordHash" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Role" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ProfilePicture" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Bio" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Blogs" Relationship="Self.FK__Blogs__UserId__6383C8BA" FromRole="Users" ToRole="Blogs" />
-          <NavigationProperty Name="Comments" Relationship="Self.FK__Comments__UserId__6B24EA82" FromRole="Users" ToRole="Comments" />
-          <NavigationProperty Name="Preferences" Relationship="Self.FK__Preferenc__UserI__72C60C4A" FromRole="Users" ToRole="Preferences" />
-          <NavigationProperty Name="Friends" Relationship="data_blogModel.FK__Friends__UserId__6EF57B66" FromRole="User" ToRole="Friend" />
-        </EntityType>
-        <Association Name="FK__Blogs__UserId__6383C8BA">
-          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
-          <End Role="Blogs" Type="Self.Blog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="Blogs">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Comments__BlogId__6A30C649">
-          <End Role="Blogs" Type="Self.Blog" Multiplicity="0..1" />
-          <End Role="Comments" Type="Self.Comment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Blogs">
-              <PropertyRef Name="BlogId" />
-            </Principal>
-            <Dependent Role="Comments">
-              <PropertyRef Name="BlogId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Comments__UserId__6B24EA82">
-          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
-          <End Role="Comments" Type="Self.Comment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="Comments">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Preferenc__UserI__72C60C4A">
-          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
-          <End Role="Preferences" Type="Self.Preference" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="Preferences">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="data_blogEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Blogs" EntityType="Self.Blog" />
-          <EntitySet Name="Comments" EntityType="Self.Comment" />
-          <EntitySet Name="Preferences" EntityType="Self.Preference" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <EntitySet Name="Users" EntityType="Self.User" />
-          <AssociationSet Name="FK__Blogs__UserId__6383C8BA" Association="Self.FK__Blogs__UserId__6383C8BA">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Blogs" EntitySet="Blogs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Comments__BlogId__6A30C649" Association="Self.FK__Comments__BlogId__6A30C649">
-            <End Role="Blogs" EntitySet="Blogs" />
-            <End Role="Comments" EntitySet="Comments" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Comments__UserId__6B24EA82" Association="Self.FK__Comments__UserId__6B24EA82">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Comments" EntitySet="Comments" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Preferenc__UserI__72C60C4A" Association="Self.FK__Preferenc__UserI__72C60C4A">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Preferences" EntitySet="Preferences" />
-          </AssociationSet>
-          <EntitySet Name="Danhmucs" EntityType="data_blogModel.Danhmuc" />
-          <EntitySet Name="Friends" EntityType="data_blogModel.Friend" />
-          <EntitySet Name="LoaiDanhmucs" EntityType="data_blogModel.LoaiDanhmuc" />
-          <AssociationSet Name="FK__Blogs__Blogdanhm__6477ECF3" Association="data_blogModel.FK__Blogs__Blogdanhm__6477ECF3">
-            <End Role="Danhmuc" EntitySet="Danhmucs" />
-            <End Role="Blog" EntitySet="Blogs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LoaiDanhmuc" Association="data_blogModel.FK_LoaiDanhmuc">
-            <End Role="LoaiDanhmuc" EntitySet="LoaiDanhmucs" />
-            <End Role="Danhmuc" EntitySet="Danhmucs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Friends__UserId__6EF57B66" Association="data_blogModel.FK__Friends__UserId__6EF57B66">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Friend" EntitySet="Friends" />
-          </AssociationSet>
-        </EntityContainer>
         <EntityType Name="Danhmuc">
           <Key>
             <PropertyRef Name="DanhmucId" />
@@ -379,7 +343,7 @@
           <Property Name="TenDanhmuc" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="MaDanhmuc" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="IdLoaiDanhmuc" Type="Int32" />
-          <NavigationProperty Name="Blogs" Relationship="data_blogModel.FK__Blogs__Blogdanhm__6477ECF3" FromRole="Danhmuc" ToRole="Blog" />
+          <NavigationProperty Name="BlogDanhmucs" Relationship="data_blogModel.FK_BlogDanhmuc_Danhmuc" FromRole="Danhmuc" ToRole="BlogDanhmuc" />
           <NavigationProperty Name="LoaiDanhmuc" Relationship="data_blogModel.FK_LoaiDanhmuc" FromRole="Danhmuc" ToRole="LoaiDanhmuc" />
         </EntityType>
         <EntityType Name="Friend">
@@ -401,15 +365,91 @@
           <Property Name="MaLoai" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Danhmucs" Relationship="data_blogModel.FK_LoaiDanhmuc" FromRole="LoaiDanhmuc" ToRole="Danhmuc" />
         </EntityType>
-        <Association Name="FK__Blogs__Blogdanhm__6477ECF3">
+        <EntityType Name="Preference">
+          <Key>
+            <PropertyRef Name="PreferenceId" />
+          </Key>
+          <Property Name="PreferenceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="Setting" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="data_blogModel.FK__Preferenc__UserI__72C60C4A" FromRole="Preference" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordHash" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ProfilePicture" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Bio" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Blogs" Relationship="data_blogModel.FK__Blogs__UserId__6383C8BA" FromRole="User" ToRole="Blog" />
+          <NavigationProperty Name="Comments" Relationship="data_blogModel.FK__Comments__UserId__6B24EA82" FromRole="User" ToRole="Comment" />
+          <NavigationProperty Name="Friends" Relationship="data_blogModel.FK__Friends__UserId__6EF57B66" FromRole="User" ToRole="Friend" />
+          <NavigationProperty Name="Preferences" Relationship="data_blogModel.FK__Preferenc__UserI__72C60C4A" FromRole="User" ToRole="Preference" />
+        </EntityType>
+        <Association Name="FK_BlogDanhmuc_Blog">
+          <End Type="data_blogModel.Blog" Role="Blog" Multiplicity="0..1" />
+          <End Type="data_blogModel.BlogDanhmuc" Role="BlogDanhmuc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Blog">
+              <PropertyRef Name="BlogId" />
+            </Principal>
+            <Dependent Role="BlogDanhmuc">
+              <PropertyRef Name="BlogId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BlogDanhmuc_Danhmuc">
           <End Type="data_blogModel.Danhmuc" Role="Danhmuc" Multiplicity="0..1" />
-          <End Type="data_blogModel.Blog" Role="Blog" Multiplicity="*" />
+          <End Type="data_blogModel.BlogDanhmuc" Role="BlogDanhmuc" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Danhmuc">
               <PropertyRef Name="DanhmucId" />
             </Principal>
+            <Dependent Role="BlogDanhmuc">
+              <PropertyRef Name="DanhmucId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Blogs__UserId__6383C8BA">
+          <End Type="data_blogModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="data_blogModel.Blog" Role="Blog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
             <Dependent Role="Blog">
-              <PropertyRef Name="Blogdanhmuc" />
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comments__BlogId__6A30C649">
+          <End Type="data_blogModel.Blog" Role="Blog" Multiplicity="0..1" />
+          <End Type="data_blogModel.Comment" Role="Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Blog">
+              <PropertyRef Name="BlogId" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="BlogId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comments__UserId__6B24EA82">
+          <End Type="data_blogModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="data_blogModel.Comment" Role="Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -437,50 +477,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <Association Name="FK__Preferenc__UserI__72C60C4A">
+          <End Type="data_blogModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="data_blogModel.Preference" Role="Preference" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Preference">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="data_blogModelStoreContainer" CdmEntityContainer="data_blogEntities">
-          <EntitySetMapping Name="Blogs">
-            <EntityTypeMapping TypeName="data_blogModel.Blog">
-              <MappingFragment StoreEntitySet="Blogs">
-                <ScalarProperty Name="summary_ct" ColumnName="summary_ct" />
-                <ScalarProperty Name="BlogTitleImg" ColumnName="BlogTitleImg" />
-                <ScalarProperty Name="seo" ColumnName="seo" />
-                <ScalarProperty Name="BlogId" ColumnName="BlogId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Blogdanhmuc" ColumnName="Blogdanhmuc" />
-                <ScalarProperty Name="BlogTitle" ColumnName="BlogTitle" />
-                <ScalarProperty Name="BlogContent" ColumnName="BlogContent" />
-                <ScalarProperty Name="BlogCreatedDate" ColumnName="BlogCreatedDate" />
-                <ScalarProperty Name="Bloglike" ColumnName="Bloglike" />
-                <ScalarProperty Name="BlogComments" ColumnName="BlogComments" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Comments">
-            <EntityTypeMapping TypeName="data_blogModel.Comment">
-              <MappingFragment StoreEntitySet="Comments">
-                <ScalarProperty Name="CommentId" ColumnName="CommentId" />
-                <ScalarProperty Name="BlogId" ColumnName="BlogId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Preferences">
-            <EntityTypeMapping TypeName="data_blogModel.Preference">
-              <MappingFragment StoreEntitySet="Preferences">
-                <ScalarProperty Name="PreferenceId" ColumnName="PreferenceId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Setting" ColumnName="Setting" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="data_blogModel.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
@@ -492,18 +506,40 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="data_blogModel.User">
-              <MappingFragment StoreEntitySet="Users">
+          <EntitySetMapping Name="BlogDanhmucs">
+            <EntityTypeMapping TypeName="data_blogModel.BlogDanhmuc">
+              <MappingFragment StoreEntitySet="BlogDanhmuc">
+                <ScalarProperty Name="DanhmucId" ColumnName="DanhmucId" />
+                <ScalarProperty Name="BlogId" ColumnName="BlogId" />
+                <ScalarProperty Name="BlogDanhmucId" ColumnName="BlogDanhmucId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Blogs">
+            <EntityTypeMapping TypeName="data_blogModel.Blog">
+              <MappingFragment StoreEntitySet="Blogs">
+                <ScalarProperty Name="summary_ct" ColumnName="summary_ct" />
+                <ScalarProperty Name="BlogTitleImg" ColumnName="BlogTitleImg" />
+                <ScalarProperty Name="seo" ColumnName="seo" />
+                <ScalarProperty Name="BlogComments" ColumnName="BlogComments" />
+                <ScalarProperty Name="Bloglike" ColumnName="Bloglike" />
+                <ScalarProperty Name="BlogCreatedDate" ColumnName="BlogCreatedDate" />
+                <ScalarProperty Name="BlogContent" ColumnName="BlogContent" />
+                <ScalarProperty Name="BlogTitle" ColumnName="BlogTitle" />
+                <ScalarProperty Name="Blogdanhmuc" ColumnName="Blogdanhmuc" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="Role" ColumnName="Role" />
-                <ScalarProperty Name="ProfilePicture" ColumnName="ProfilePicture" />
-                <ScalarProperty Name="Bio" ColumnName="Bio" />
+                <ScalarProperty Name="BlogId" ColumnName="BlogId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="data_blogModel.Comment">
+              <MappingFragment StoreEntitySet="Comments">
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="BlogId" ColumnName="BlogId" />
+                <ScalarProperty Name="CommentId" ColumnName="CommentId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -536,7 +572,32 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="Preferences">
+            <EntityTypeMapping TypeName="data_blogModel.Preference">
+              <MappingFragment StoreEntitySet="Preferences">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Setting" ColumnName="Setting" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PreferenceId" ColumnName="PreferenceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="data_blogModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Bio" ColumnName="Bio" />
+                <ScalarProperty Name="ProfilePicture" ColumnName="ProfilePicture" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
