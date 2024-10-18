@@ -9,10 +9,6 @@
     {
       "library": "bootstrap@5.3.3",
       "destination": "Content/bootstrap/"
-    },
-    {
-      "library": "ckeditor@4.25.0",
-      "destination": "Content/ckeditor/"
     }
   ]
 }

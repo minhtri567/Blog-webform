@@ -12,7 +12,7 @@
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link rel="stylesheet" href="~/Content/font-awesome/css/all.min.css">
     <link rel="stylesheet" href="~/Content/bootstrap/css/bootstrap.min.css">
-
+    <link href="~/Content/selectize/css/selectize.default.min.css" rel="stylesheet" /> 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/Content/bootstrap/js/bootstrap.bundle.min.js") %>
         <%: Scripts.Render("~/Scripts/MyScript.js") %>

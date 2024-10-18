@@ -12,7 +12,17 @@ namespace BTLBlog
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                if (Session["Username"] == null)
+                {
+                    string script = "<script>Custom.Mytoast('Vui lòng đăng nhập để thực hiện chức năng', '/images/error.svg');</script>";
+                    ClientScript.RegisterStartupScript(this.GetType(), "ShowToast", script);
+                    
+                    Response.Redirect("Login.aspx");
+                }
+                LoadDanhmuc("THE_LOAI");
+            }
         }
         protected void btnLuu_Click(object sender, EventArgs e)
         {

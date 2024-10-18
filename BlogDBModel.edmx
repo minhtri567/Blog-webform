@@ -19,6 +19,7 @@
           <Property Name="BlogComments" Type="int" />
           <Property Name="seo" Type="nvarchar" MaxLength="250" />
           <Property Name="BlogTitleImg" Type="nvarchar" MaxLength="250" />
+          <Property Name="summary_ct" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Comments">
           <Key>
@@ -232,6 +233,7 @@
           <NavigationProperty Name="Danhmuc" Relationship="data_blogModel.FK__Blogs__Blogdanhm__6477ECF3" FromRole="Blog" ToRole="Danhmuc" />
           <Property Name="seo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="BlogTitleImg" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="summary_ct" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -444,6 +446,7 @@
           <EntitySetMapping Name="Blogs">
             <EntityTypeMapping TypeName="data_blogModel.Blog">
               <MappingFragment StoreEntitySet="Blogs">
+                <ScalarProperty Name="summary_ct" ColumnName="summary_ct" />
                 <ScalarProperty Name="BlogTitleImg" ColumnName="BlogTitleImg" />
                 <ScalarProperty Name="seo" ColumnName="seo" />
                 <ScalarProperty Name="BlogId" ColumnName="BlogId" />

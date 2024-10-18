@@ -180,6 +180,8 @@
     <Content Include="Content\font-awesome\sprites\brands.svg" />
     <Content Include="Content\font-awesome\sprites\regular.svg" />
     <Content Include="Content\font-awesome\sprites\solid.svg" />
+    <Content Include="Content\selectize\css\selectize.default.min.css" />
+    <Content Include="Content\selectize\js\selectize.min.js" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="EditAccount.aspx" />
@@ -377,6 +379,9 @@
     <Compile Include="sysdiagram.cs">
       <DependentUpon>BlogDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="UploadHandler.ashx.cs">
+      <DependentUpon>UploadHandler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="User.cs">
       <DependentUpon>BlogDBModel.tt</DependentUpon>
     </Compile>
@@ -508,6 +513,7 @@
     <Content Include="Content\bootstrap\scss\_variables.scss" />
     <Content Include="Admin.Master" />
     <None Include="packages.config" />
+    <Content Include="UploadHandler.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
