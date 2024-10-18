@@ -8,12 +8,21 @@
         </div>
         <div class="container-input">
             <label class="form-text">Hình ảnh tiêu đề:</label>
-            <asp:FileUpload ID="fileBlogTitleImg" runat="server" CssClass="form-control" />
+            <asp:FileUpload ID="fileBlogTitleImg" runat="server" CssClass="form-control file-upload" />
+            <div id="container-imgPreview" style="display:none;"">
+                <img id="imgPreview" src="#" alt="Preview Image" class="img-preview" />
+            </div>
+            
        </div>
         <div class="container-input">
             <label class="form-text">Danh mục:</label>
-            <asp:ListBox ID="ddlBlogDanhmuc" runat="server" CssClass="form-control" SelectionMode="Multiple">
+            <asp:ListBox ID="ddlBlogDanhmuc" runat="server" CssClass="selectize" SelectionMode="Multiple">
             </asp:ListBox>
+        </div>
+
+        <div class="ckeditor" >
+            <label class="form-text">Tóm tắt bài viết:</label>
+            <asp:TextBox ID="txtsumaruct" CssClass="form-control" TextMode="MultiLine" runat="server" />
         </div>
 
         <div class="ckeditor" >
@@ -24,9 +33,35 @@
 
         <asp:Button ID="btnSaveBlog" runat="server" Text="Lưu bài viết" OnClick="btnLuu_Click" CssClass="btn btn-primary" />
     </asp:Panel>
+    <script src="/Scripts/jquery/jquery.min.js"></script>
     <script src="/Scripts/ckeditor/ckeditor.js"></script>
     <script src="/Content/selectize/js/selectize.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
+
+        const fileInput = document.getElementById('<%= fileBlogTitleImg.ClientID %>');
+        const imgPreview = document.getElementById('imgPreview');
+        const ctimgPreview = document.getElementById('container-imgPreview');
+
+        fileInput.addEventListener('mouseenter', function () {
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    imgPreview.src = e.target.result;
+                    ctimgPreview.style.display = 'block'; // Hiển thị hình ảnh
+                };
+
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Ẩn hình ảnh khi rời khỏi input file
+        fileInput.addEventListener('mouseleave', function () {
+            ctimgPreview.style.display = 'none'; // Ẩn hình ảnh
+        });
+
+        $('#MainContent_ddlBlogDanhmuc').selectize({ sortField: 'text' });
         CKEDITOR.ClassicEditor.create(document.getElementById('MainContent_txtBlogContent'), {
                 toolbar: {
                     items: [

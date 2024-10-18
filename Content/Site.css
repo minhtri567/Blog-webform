@@ -112,13 +112,29 @@ header.navbar{
     color: #212529 !important;
 }
 
-.ad-container-dm .ad-table-data {
-
-}
 
 .ckeditor .ck-content {
     min-height: 400px;
 }
 .container-newblog .form-control {
     width: 100%;
+}
+
+.container-input {
+    position: relative;
+    display: block;
+}
+#container-imgPreview{
+    position : absolute;
+    aspect-ratio :auto;
+    z-index : 10;
+    left :0;
+    max-width : 300px;
+}
+.img-preview {
+    aspect-ratio: auto;
+}
+
+.file-upload:hover > #imgPreview {
+    display: block;
 }

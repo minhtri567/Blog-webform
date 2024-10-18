@@ -44,6 +44,7 @@ namespace BTLBlog
                     BlogTitle = txtBlogTitle.Text,
                     BlogContent = txtBlogContent.Text,
                     BlogCreatedDate = DateTime.Now,
+                    summary_ct = txtsumaruct.Text,
                     UserId = (int)Session["UserId"]
                 };
 

@@ -210,6 +210,7 @@
     <Content Include="Content\font-awesome\webfonts\fa-v4compatibility.ttf" />
     <Content Include="Content\font-awesome\webfonts\fa-v4compatibility.woff2" />
     <Content Include="Scripts\ckeditor\ckeditor.js" />
+    <Content Include="Scripts\jquery\jquery.min.js" />
     <Content Include="Scripts\MyScript.js" />
     <Content Include="Scripts\WebForms\DetailsView.js" />
     <Content Include="Scripts\WebForms\Focus.js" />
