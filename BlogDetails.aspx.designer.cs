@@ -24,15 +24,6 @@ namespace BTLBlog
         protected global::System.Web.UI.WebControls.Repeater rptDanhMuc;
 
         /// <summary>
-        /// imgBlogTitleImg control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgBlogTitleImg;
-
-        /// <summary>
         /// ltBlogTitle control.
         /// </summary>
         /// <remarks>
@@ -42,6 +33,42 @@ namespace BTLBlog
         protected global::System.Web.UI.WebControls.Literal ltBlogTitle;
 
         /// <summary>
+        /// linkposter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink linkposter;
+
+        /// <summary>
+        /// avartarposter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image avartarposter;
+
+        /// <summary>
+        /// linkposter1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink linkposter1;
+
+        /// <summary>
+        /// blogcreactat control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label blogcreactat;
+
+        /// <summary>
         /// ltBlogContent control.
         /// </summary>
         /// <remarks>
@@ -49,5 +76,32 @@ namespace BTLBlog
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal ltBlogContent;
+
+        /// <summary>
+        /// txtCommentContent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCommentContent;
+
+        /// <summary>
+        /// btnSubmitComment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSubmitComment;
+
+        /// <summary>
+        /// rptComments control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptComments;
     }
 }

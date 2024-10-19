@@ -101,9 +101,7 @@ namespace BTLBlog
                         hfDanhmucId.Value = Convert.ToString(danhmuc.DanhmucId);
                         txtSuaTenLoai.Text = danhmuc.TenDanhmuc;
                         txtSuaMaLoai.Text = danhmuc.MaDanhmuc;
-                        ddlSuaLoaiDanhmucCha.SelectedValue = danhmuc.IdLoaiDanhmuc.ToString();
 
-                        // Chuyển đến View chỉnh sửa
                         mvDanhmuc.ActiveViewIndex = 1; // Giả sử View chỉnh sửa là View index 1
                     }
                 }
@@ -168,7 +166,7 @@ namespace BTLBlog
                     // Cập nhật thông tin danh mục
                     danhmuc.TenDanhmuc = txtSuaTenLoai.Text;
                     danhmuc.MaDanhmuc = txtSuaMaLoai.Text;
-                    danhmuc.IdLoaiDanhmuc = int.Parse(ddlLoaiDanhmucCha.SelectedValue);
+                    danhmuc.IdLoaiDanhmuc = int.Parse(hdSelectedValue.Value);
 
                     context.SaveChanges();
 
@@ -179,8 +177,9 @@ namespace BTLBlog
                     string script = "<script>Custom.Mytoast('Cập nhật thành công!', '/images/success.svg');</script>";
                     ClientScript.RegisterStartupScript(this.GetType(), "ShowToast", script);
 
-                    // Chuyển về View danh sách
                     mvDanhmuc.ActiveViewIndex = 0;
+
+                    Response.Redirect(Request.RawUrl);
                 }
                 else
                 {

@@ -21,7 +21,7 @@
           <Property Name="UserId" Type="int" />
           <Property Name="Blogdanhmuc" Type="int" />
           <Property Name="BlogTitle" Type="nvarchar" MaxLength="200" />
-          <Property Name="BlogContent" Type="text" />
+          <Property Name="BlogContent" Type="nvarchar(max)" />
           <Property Name="BlogCreatedDate" Type="datetime" />
           <Property Name="Bloglike" Type="int" />
           <Property Name="BlogComments" Type="int" />
@@ -36,7 +36,7 @@
           <Property Name="CommentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BlogId" Type="int" />
           <Property Name="UserId" Type="int" />
-          <Property Name="Content" Type="text" />
+          <Property Name="Content" Type="nvarchar(max)" />
           <Property Name="CreatedDate" Type="datetime" />
         </EntityType>
         <EntityType Name="Danhmuc">
@@ -312,7 +312,7 @@
           <Property Name="UserId" Type="Int32" />
           <Property Name="Blogdanhmuc" Type="Int32" />
           <Property Name="BlogTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="BlogContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="BlogContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="BlogCreatedDate" Type="DateTime" Precision="3" />
           <Property Name="Bloglike" Type="Int32" />
           <Property Name="BlogComments" Type="Int32" />
@@ -330,7 +330,7 @@
           <Property Name="CommentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="BlogId" Type="Int32" />
           <Property Name="UserId" Type="Int32" />
-          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Blog" Relationship="data_blogModel.FK__Comments__BlogId__6A30C649" FromRole="Comment" ToRole="Blog" />
           <NavigationProperty Name="User" Relationship="data_blogModel.FK__Comments__UserId__6B24EA82" FromRole="Comment" ToRole="User" />

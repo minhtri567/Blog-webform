@@ -36,8 +36,8 @@
                         </ul>
                         <div class="navbar-right">
                             <asp:PlaceHolder ID="phNotLoggedIn" runat="server">
-                                <a href="Login">Đăng nhập</a> | 
-                                <a href="Register">Đăng ký</a>
+                                <a  href='<%= ResolveUrl("Login") %>'>Đăng nhập</a> | 
+                                <a  href='<%= ResolveUrl("Register") %>'>Đăng ký</a>
                             </asp:PlaceHolder>
 
                             <asp:PlaceHolder ID="phLoggedIn" runat="server" Visible="false">
@@ -48,14 +48,14 @@
                                   <ul class="dropdown-menu dropdown-menu-end">
                                       <asp:PlaceHolder ID="adminPanel" runat="server">
                                           <li>
-                                              <a class="dropdown-item" runat="server" href="Adminhome">Trang quản trị</a>
+                                              <a class="dropdown-item" href='<%= ResolveUrl("Adminhome") %>'>Trang quản trị</a>
                                           </li>
                                       </asp:PlaceHolder>
                                       <li>
-                                          <a class="dropdown-item" href="AccountInfo">Thông tin tài khoản</a>
+                                          <a class="dropdown-item" href='<%= ResolveUrl("AccountInfo") %>'>Thông tin tài khoản</a>
                                       </li>
                                       <li>
-                                            <a class="dropdown-item" href="New-blog">Tạo bài viết mới</a>
+                                            <a class="dropdown-item" href='<%= ResolveUrl("New-blog") %>'>Tạo bài viết mới</a>
                                       </li>
                                       <li>
                                         <asp:LinkButton ID="btnLogout" runat="server" OnClick="btnLogout_Click" Text="Đăng xuất" class="dropdown-item" />

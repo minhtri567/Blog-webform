@@ -73,6 +73,7 @@
              <h2>Sửa Loại danh mục</h2>
              
              <asp:HiddenField ID="hfDanhmucId" runat="server" />
+             <asp:HiddenField ID="hdSelectedValue" runat="server" />
              <asp:Label ID="lblSuaTenLoai" runat="server" Text="Tên Loại: "></asp:Label>
              <asp:TextBox ID="txtSuaTenLoai" runat="server"></asp:TextBox>
              <asp:RequiredFieldValidator ControlToValidate="txtSuaTenLoai" ErrorMessage="Tên loại không được để trống" runat="server" />
@@ -91,4 +92,15 @@
          </asp:View>
      </asp:MultiView>
   </div>
+    <script type="text/javascript">
+        var a = document.getElementById("<%= ddlSuaLoaiDanhmucCha.ClientID %>");
+        var hiddenField = document.getElementById("<%= hdSelectedValue.ClientID %>");
+
+        a.onchange = function () {
+            hiddenField.value = a.value; 
+        };
+    </script>
 </asp:Content>
+
+
+

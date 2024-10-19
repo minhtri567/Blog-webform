@@ -6,13 +6,6 @@
     padding-right: 15px;
 }
 
-/* Set widths on the form inputs since otherwise they're 100% wide */
-input,
-select,
-textarea {
-    max-width: 280px;
-}
-
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
     .body-content {
@@ -171,4 +164,70 @@ header.navbar{
 .cotainer-blog {
     max-width: 980px;
     margin : auto;
+}
+.comment-blog .media img {
+    width : 36px;
+    height : 36px;
+    object-fit : cover;
+}
+
+.comment-blog .media .acc-comment {
+    display : flex;
+    align-items : center;
+}
+.comment-blog .media .infor-user-comment {
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+}
+.comment-blog .media .infor-user-comment a {
+    text-decoration : none;
+    color : black;
+}
+.comment-blog .media-body {
+    margin : 16px 0px 0px 48px;
+}
+.cotainer-blog .header-blog .cateblog {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+.cotainer-blog .header-blog .cateblog a {
+    text-decoration : none;
+    color : #454545;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+}
+.cotainer-blog .header-blog .cateblog .danh-muc-item {
+    margin-right : 12px;
+}
+.cotainer-blog .header-blog .cateblog a:hover {
+    color: #1a1a1a;
+}
+.cotainer-blog .header-blog .avatar-poster{
+    display : flex;
+    align-items :center;
+    justify-content : space-between;
+}
+.cotainer-blog .header-blog .avatar-poster .avatar a {
+    display: block;
+    width: 32px;
+    height: 32px;
+    margin-right: 8px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.cotainer-blog .header-blog .avatar-poster .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.cotainer-blog .header-blog .avatar-poster .name a{
+    text-decoration : none;
+    color : #454545;
+}
+.cotainer-blog .header-blog .avatar-poster .name a{
+    color: #1a1a1a;
 }

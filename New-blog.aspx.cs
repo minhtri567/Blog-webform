@@ -72,6 +72,8 @@ namespace BTLBlog
 
                 context.SaveChanges();
 
+                Response.Redirect(Request.RawUrl);
+
                 // Hiển thị thông báo thành công
                 string script = "<script>Custom.Mytoast('Lưu bài viết thành công!', '/images/success.svg');</script>";
                 ClientScript.RegisterStartupScript(this.GetType(), "ShowToast", script);

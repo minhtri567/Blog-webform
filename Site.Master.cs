@@ -79,7 +79,7 @@ namespace BTLBlog
                 Response.Cookies.Add(rememberMeCookie);
             }
             Session.Abandon();
-            Response.Redirect("Default.aspx");
+            Response.Redirect("/");
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.UI.WebControls;
 
 namespace BTLBlog
 {
@@ -25,7 +26,7 @@ namespace BTLBlog
                         Directory.CreateDirectory(folderPath);
                     }
 
-                    string fileName = Path.GetFileName(file.FileName);
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                     string filePath = Path.Combine(folderPath, fileName);
                     file.SaveAs(filePath);
 

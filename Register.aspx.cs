@@ -43,6 +43,7 @@ namespace BTLBlog
                     Email = email,
                     PasswordHash = passwordHash,
                     Role = "User",
+                    ProfilePicture = "images/user.png", 
                     CreatedDate = DateTime.Now
                 };
 
