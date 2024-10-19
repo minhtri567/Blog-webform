@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -84,17 +87,36 @@ namespace BTLBlog
             // Chuyển đổi về chữ thường
             string seoTitle = title.ToLower();
 
+            // Chuyển đổi các ký tự có dấu sang không dấu
+            var normalizedString = RemoveDiacritics(seoTitle);
+
             // Thay thế khoảng trắng bằng dấu gạch ngang
-            seoTitle = seoTitle.Replace(" ", "-");
+            seoTitle = normalizedString.Replace(" ", "-");
 
             // Loại bỏ các ký tự không hợp lệ
-            seoTitle = System.Text.RegularExpressions.Regex.Replace(seoTitle, @"[^a-z0-9\-]", "");
+            seoTitle = Regex.Replace(seoTitle, @"[^a-z0-9\-]", "");
 
             // Loại bỏ các dấu gạch ngang liên tiếp
-            seoTitle = System.Text.RegularExpressions.Regex.Replace(seoTitle, @"-+", "-");
+            seoTitle = Regex.Replace(seoTitle, @"-+", "-");
 
             // Trả về chuỗi SEO đã chuẩn hóa
             return seoTitle;
+        }
+        private static string RemoveDiacritics(string text)
+        {
+            var normalizedString = text.Normalize(NormalizationForm.FormD);
+            var stringBuilder = new StringBuilder();
+
+            foreach (var c in normalizedString)
+            {
+                var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c);
+                if (unicodeCategory != UnicodeCategory.NonSpacingMark)
+                {
+                    stringBuilder.Append(c);
+                }
+            }
+
+            return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
         }
         private string SaveBlogTitleImage(FileUpload fileUpload)
         {

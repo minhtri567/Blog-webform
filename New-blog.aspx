@@ -66,6 +66,9 @@
 
         $('#MainContent_ddlBlogDanhmuc').selectize({ sortField: 'text' });
         CKEDITOR.ClassicEditor.create(document.getElementById('MainContent_txtBlogContent'), {
+                ckfinder: {
+                    uploadUrl: '/UploadHandler.ashx' 
+                },
                 toolbar: {
                     items: [
                         'exportPDF', 'exportWord', '|',
@@ -89,9 +92,6 @@
                         startIndex: true,
                         reversed: true
                     }
-                },
-                ckfinder: {
-                    uploadUrl: '/UploadHandler.ashx'  // Đường dẫn tới API tải ảnh
                 },
                 heading: {
                     options: [
@@ -188,6 +188,11 @@
                     'PasteFromOfficeEnhanced',
                     'CaseChange'
                 ]
+            })
+            .then(editor => {
+                editor.on('error', evt => {
+                    console.error(evt);
+                });
             })
             .catch(error => {
                 console.error(error);

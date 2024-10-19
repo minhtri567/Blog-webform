@@ -32,8 +32,16 @@ namespace BTLBlog
 
                     // Trả về JSON cho CKEditor với URL của ảnh
                     var imageUrl = context.Request.Url.GetLeftPart(UriPartial.Authority) + "/ImagesUploaded/" + fileName;
+
+                    var jsonResponse = new
+                    {
+                        uploaded = true,
+                        url = imageUrl
+                    };
+
+                    // Đặt header và trả về JSON
                     context.Response.ContentType = "application/json";
-                    context.Response.Write("{\"url\":\"" + imageUrl + "\"}");
+                    context.Response.Write(Newtonsoft.Json.JsonConvert.SerializeObject(jsonResponse));
                 }
             }
             catch (Exception ex)
