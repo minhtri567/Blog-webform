@@ -55,7 +55,9 @@
           <Property Name="FriendId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="int" />
           <Property Name="FriendUserId" Type="int" />
-          <Property Name="FriendUrl" Type="nvarchar" MaxLength="200" />
+          <Property Name="FriendName" Type="nvarchar" MaxLength="200" />
+          <Property Name="fr_status" Type="int" />
+          <Property Name="fr_img_url" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="LoaiDanhmuc">
           <Key>
@@ -257,7 +259,6 @@
           <EntitySet Name="Blogs" EntityType="data_blogModel.Blog" />
           <EntitySet Name="Comments" EntityType="data_blogModel.Comment" />
           <EntitySet Name="Danhmucs" EntityType="data_blogModel.Danhmuc" />
-          <EntitySet Name="Friends" EntityType="data_blogModel.Friend" />
           <EntitySet Name="LoaiDanhmucs" EntityType="data_blogModel.LoaiDanhmuc" />
           <EntitySet Name="Preferences" EntityType="data_blogModel.Preference" />
           <EntitySet Name="Users" EntityType="data_blogModel.User" />
@@ -285,13 +286,14 @@
             <End Role="LoaiDanhmuc" EntitySet="LoaiDanhmucs" />
             <End Role="Danhmuc" EntitySet="Danhmucs" />
           </AssociationSet>
-          <AssociationSet Name="FK__Friends__UserId__6EF57B66" Association="data_blogModel.FK__Friends__UserId__6EF57B66">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Friend" EntitySet="Friends" />
-          </AssociationSet>
           <AssociationSet Name="FK__Preferenc__UserI__72C60C4A" Association="data_blogModel.FK__Preferenc__UserI__72C60C4A">
             <End Role="User" EntitySet="Users" />
             <End Role="Preference" EntitySet="Preferences" />
+          </AssociationSet>
+          <EntitySet Name="Friends" EntityType="data_blogModel.Friend" />
+          <AssociationSet Name="FK__Friends__UserId__6EF57B66" Association="data_blogModel.FK__Friends__UserId__6EF57B66">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Friend" EntitySet="Friends" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="BlogDanhmuc">
@@ -346,16 +348,6 @@
           <NavigationProperty Name="BlogDanhmucs" Relationship="data_blogModel.FK_BlogDanhmuc_Danhmuc" FromRole="Danhmuc" ToRole="BlogDanhmuc" />
           <NavigationProperty Name="LoaiDanhmuc" Relationship="data_blogModel.FK_LoaiDanhmuc" FromRole="Danhmuc" ToRole="LoaiDanhmuc" />
         </EntityType>
-        <EntityType Name="Friend">
-          <Key>
-            <PropertyRef Name="FriendId" />
-          </Key>
-          <Property Name="FriendId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" />
-          <Property Name="FriendUserId" Type="Int32" />
-          <Property Name="FriendUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="User" Relationship="data_blogModel.FK__Friends__UserId__6EF57B66" FromRole="Friend" ToRole="User" />
-        </EntityType>
         <EntityType Name="LoaiDanhmuc">
           <Key>
             <PropertyRef Name="LoaiDanhmucId" />
@@ -390,8 +382,8 @@
           <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Blogs" Relationship="data_blogModel.FK__Blogs__UserId__6383C8BA" FromRole="User" ToRole="Blog" />
           <NavigationProperty Name="Comments" Relationship="data_blogModel.FK__Comments__UserId__6B24EA82" FromRole="User" ToRole="Comment" />
-          <NavigationProperty Name="Friends" Relationship="data_blogModel.FK__Friends__UserId__6EF57B66" FromRole="User" ToRole="Friend" />
           <NavigationProperty Name="Preferences" Relationship="data_blogModel.FK__Preferenc__UserI__72C60C4A" FromRole="User" ToRole="Preference" />
+          <NavigationProperty Name="Friends" Relationship="data_blogModel.FK__Friends__UserId__6EF57B66" FromRole="User" ToRole="Friend" />
         </EntityType>
         <Association Name="FK_BlogDanhmuc_Blog">
           <End Type="data_blogModel.Blog" Role="Blog" Multiplicity="0..1" />
@@ -465,18 +457,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Friends__UserId__6EF57B66">
-          <End Type="data_blogModel.User" Role="User" Multiplicity="0..1" />
-          <End Type="data_blogModel.Friend" Role="Friend" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="Friend">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Preferenc__UserI__72C60C4A">
           <End Type="data_blogModel.User" Role="User" Multiplicity="0..1" />
           <End Type="data_blogModel.Preference" Role="Preference" Multiplicity="*" />
@@ -485,6 +465,30 @@
               <PropertyRef Name="UserId" />
             </Principal>
             <Dependent Role="Preference">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Friend">
+          <Key>
+            <PropertyRef Name="FriendId" />
+          </Key>
+          <Property Name="FriendId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="FriendUserId" Type="Int32" />
+          <Property Name="FriendName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="fr_status" Type="Int32" />
+          <Property Name="fr_img_url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="data_blogModel.FK__Friends__UserId__6EF57B66" FromRole="Friend" ToRole="User" />
+        </EntityType>
+        <Association Name="FK__Friends__UserId__6EF57B66">
+          <End Type="data_blogModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="data_blogModel.Friend" Role="Friend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Friend">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
@@ -553,16 +557,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Friends">
-            <EntityTypeMapping TypeName="data_blogModel.Friend">
-              <MappingFragment StoreEntitySet="Friends">
-                <ScalarProperty Name="FriendUrl" ColumnName="FriendUrl" />
-                <ScalarProperty Name="FriendUserId" ColumnName="FriendUserId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="FriendId" ColumnName="FriendId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="LoaiDanhmucs">
             <EntityTypeMapping TypeName="data_blogModel.LoaiDanhmuc">
               <MappingFragment StoreEntitySet="LoaiDanhmuc">
@@ -594,6 +588,18 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Friends">
+            <EntityTypeMapping TypeName="data_blogModel.Friend">
+              <MappingFragment StoreEntitySet="Friends">
+                <ScalarProperty Name="fr_img_url" ColumnName="fr_img_url" />
+                <ScalarProperty Name="fr_status" ColumnName="fr_status" />
+                <ScalarProperty Name="FriendName" ColumnName="FriendName" />
+                <ScalarProperty Name="FriendUserId" ColumnName="FriendUserId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FriendId" ColumnName="FriendId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

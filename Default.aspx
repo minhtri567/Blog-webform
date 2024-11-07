@@ -6,10 +6,8 @@
         <div class="text-center">
             <div class="blog-container" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
                 <% 
-                    // Gọi phương thức LoadBlogs để lấy danh sách bài viết
                     var blogs = LoadBlogs();
 
-                    // Lặp qua danh sách bài viết và hiển thị chúng
                     foreach (var blog in blogs)
                     {
                 %>

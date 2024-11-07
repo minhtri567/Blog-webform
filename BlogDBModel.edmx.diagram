@@ -9,7 +9,6 @@
         <EntityTypeShape EntityType="data_blogModel.Blog" Width="1.5" PointX="3" PointY="2.25" />
         <EntityTypeShape EntityType="data_blogModel.Comment" Width="1.5" PointX="5.375" PointY="0.625" />
         <EntityTypeShape EntityType="data_blogModel.Danhmuc" Width="1.5" PointX="6.75" PointY="3.375" />
-        <EntityTypeShape EntityType="data_blogModel.Friend" Width="1.5" PointX="2.875" PointY="6.875" />
         <EntityTypeShape EntityType="data_blogModel.LoaiDanhmuc" Width="1.5" PointX="8.625" PointY="3.375" />
         <EntityTypeShape EntityType="data_blogModel.Preference" Width="1.5" PointX="0.5" PointY="6.875" />
         <EntityTypeShape EntityType="data_blogModel.User" Width="1.5" PointX="0.75" PointY="2.375" />
@@ -19,8 +18,9 @@
         <AssociationConnector Association="data_blogModel.FK__Comments__BlogId__6A30C649" />
         <AssociationConnector Association="data_blogModel.FK__Comments__UserId__6B24EA82" />
         <AssociationConnector Association="data_blogModel.FK_LoaiDanhmuc" />
-        <AssociationConnector Association="data_blogModel.FK__Friends__UserId__6EF57B66" />
         <AssociationConnector Association="data_blogModel.FK__Preferenc__UserI__72C60C4A" />
+        <EntityTypeShape EntityType="data_blogModel.Friend" Width="1.5" PointX="3" PointY="7" />
+        <AssociationConnector Association="data_blogModel.FK__Friends__UserId__6EF57B66" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

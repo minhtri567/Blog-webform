@@ -231,3 +231,26 @@ header.navbar{
 .cotainer-blog .header-blog .avatar-poster .name a{
     color: #1a1a1a;
 }
+
+.body-content .nagative-fr input {
+    border: none;
+    outline: unset;
+    border-radius: 6px;
+    background-color: #d6d6d6;
+    padding : 6px 10px;
+
+}
+
+.body-content .nagative-fr input {
+    color : black;
+    border: none;
+    outline: unset;
+    border-radius: 6px;
+    background-color: #d6d6d6;
+    padding: 6px 10px;
+    font-weight: 600;
+}
+.body-content .nagative-fr input:hover{
+    color : #111111;
+    background-color: #e1e1e1;
+}

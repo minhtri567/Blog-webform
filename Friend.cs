@@ -17,7 +17,9 @@ namespace BTLBlog
         public int FriendId { get; set; }
         public Nullable<int> UserId { get; set; }
         public Nullable<int> FriendUserId { get; set; }
-        public string FriendUrl { get; set; }
+        public string FriendName { get; set; }
+        public Nullable<int> fr_status { get; set; }
+        public string fr_img_url { get; set; }
     
         public virtual User User { get; set; }
     }
