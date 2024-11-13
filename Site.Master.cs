@@ -66,6 +66,7 @@ namespace BTLBlog
                     // Ẩn chức năng chỉ dành cho Admin
                     adminPanel.Visible = false;
                 }
+                LoadDanhSachTheLoai();
             }
 
         }
@@ -80,6 +81,20 @@ namespace BTLBlog
             }
             Session.Abandon();
             Response.Redirect("/");
+        }
+        private void LoadDanhSachTheLoai()
+        {
+            using (var context = new BlogDBEntities())
+            {
+                var theLoaiList = context.Danhmucs.Where( t => t.LoaiDanhmuc.MaLoai == "THE_LOAI").Select(t => new
+                {
+                    t.TenDanhmuc,
+                    t.MaDanhmuc
+                }).ToList();
+
+                rptTheLoai.DataSource = theLoaiList;
+                rptTheLoai.DataBind();
+            }
         }
     }
 }

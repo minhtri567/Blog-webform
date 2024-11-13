@@ -95,10 +95,11 @@
     <script type="text/javascript">
         var a = document.getElementById("<%= ddlSuaLoaiDanhmucCha.ClientID %>");
         var hiddenField = document.getElementById("<%= hdSelectedValue.ClientID %>");
-
-        a.onchange = function () {
-            hiddenField.value = a.value; 
-        };
+        if (a != null) {
+            a.onchange = function () {
+                hiddenField.value = a.value;
+            };
+        }
     </script>
 </asp:Content>
 

@@ -13,29 +13,41 @@ namespace BTLBlog
         {
             if (!IsPostBack)
             {
-                string categorySeo = Request.QueryString["seo"]; // Lấy tham số từ URL
-                LoadCategoryBlogs(categorySeo);
+                string categorySeo = Page.RouteData.Values["MaDanhmuc"] as string;
+                if (!string.IsNullOrEmpty(categorySeo))
+                {
+                    LoadCategoryBlogs(categorySeo);
+                }
             }
         }
         private void LoadCategoryBlogs(string categorySeo)
         {
             using (var context = new BlogDBEntities())
             {
-                // Lấy danh mục theo seo
+                // Lấy danh mục theo mã seo
                 var category = context.Danhmucs.SingleOrDefault(d => d.MaDanhmuc == categorySeo);
 
                 if (category != null)
                 {
-                    ltCategoryTitle.InnerText = category.TenDanhmuc; 
+                    ltCategoryTitle.InnerText = category.TenDanhmuc;
 
+                    // Lấy danh sách BlogId từ bảng BlogDanhmuc có DanhmucId tương ứng
+                    var blogIds = context.BlogDanhmuc
+                        .Where(bd => bd.DanhmucId == category.DanhmucId)
+                        .Select(bd => bd.BlogId)
+                        .ToList();
+
+                    // Lấy các blog theo BlogId
                     var blogs = context.Blogs
-                        .Where(b => b.Blogdanhmuc == category.DanhmucId)
+                        .Where(b => blogIds.Contains(b.BlogId))
                         .Select(b => new
                         {
                             b.BlogId,
                             b.BlogTitle,
                             b.summary_ct, // Tóm tắt
-                            b.seo
+                            b.seo,
+                            b.BlogCreatedDate,
+                            b.BlogTitleImg
                         })
                         .ToList();
 
@@ -49,5 +61,6 @@ namespace BTLBlog
                 }
             }
         }
+
     }
 }

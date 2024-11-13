@@ -31,6 +31,22 @@
                     <div class="collapse navbar-collapse d-sm-inline-flex justify-content-end">
                         <ul class="navbar-nav flex-grow-1 navbar-center">
                             <li class="nav-item"><a class="nav-link" runat="server" href="~/">Trang chủ</a></li>
+                            <li class="nav-item dropdown">
+                                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Thể loại
+                                  </a>
+                                <ul class="dropdown-menu">
+                                    <asp:Repeater ID="rptTheLoai" runat="server">
+                                        <ItemTemplate>
+                                            <li>
+                                                <a class="dropdown-item" href='<%# ResolveUrl("~/the-loai/" + Eval("MaDanhmuc")) %>'>
+                                                    <%# Eval("TenDanhmuc") %>
+                                                </a>
+                                            </li>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </ul>
+                            </li>
                             <li class="nav-item"><a class="nav-link" href='<%= ResolveUrl("UserBlogs") %>' >Blog của tôi</a></li>
                             <li class="nav-item"><a class="nav-link" href='<%= ResolveUrl("Listfriend") %>'>Bạn bè</a></li>
                         </ul>

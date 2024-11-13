@@ -20,7 +20,7 @@ namespace BTLBlog
             );
             routes.MapPageRoute(
                 "BlogCateRoute",
-                "the-loai/{seo}",
+                "the-loai/{MaDanhmuc}",
                 "~/Category.aspx"
             );
         }

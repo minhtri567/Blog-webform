@@ -42,7 +42,7 @@
                           <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="Adminloaidanhmuc">Quản lý loại danh mục</a></li>
                             <li><a class="dropdown-item" href="Admindanhmuc">Quản lý danh mục</a></li>
-                            <li><a class="dropdown-item" href="#">Quản lý người dùng</a></li>
+                            <li><a class="dropdown-item" href="Adminuser">Quản lý người dùng</a></li>
                           </ul>
                         </li>
                     </ul>
