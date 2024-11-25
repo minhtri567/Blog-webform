@@ -27,11 +27,9 @@
                                             <span><%= blog.BlogCreatedDate?.ToString("HH:mm dd/MM/yyyy") %></span>
                                         </div>
                                         <div>
-                                            <button class="btn-share" type="button">
-                                                <span class="">
-                                                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                                                </span>
-                                            </button>
+                                            <span class="btn-share" id="btn-share-<%= blog.BlogId %>" data-link="https://localhost:44333/blog/<%= blog.seo %>">
+                                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                                            </span>
                                         </div>
                                     </div>
                                     <div class="item-title">
@@ -53,7 +51,5 @@
                 %>
             </div>
         </div>
-
     </main>
-
 </asp:Content>

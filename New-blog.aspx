@@ -199,7 +199,12 @@
             });
 
         document.querySelector('form').onsubmit = function () {
-            document.querySelector('#MainContent_txtBlogContent').value = editor.getData();
+            // Kiểm tra nếu editor đã được định nghĩa
+            if (typeof editor !== 'undefined' && editor !== null) {
+                document.querySelector('#MainContent_txtBlogContent').value = editor.getData();
+            } else {
+                console.error('Editor is not defined or initialized.');
+            }
         };
     </script>
 </asp:Content>

@@ -15,7 +15,7 @@
                         <div>
                             <div class="gallery-item-wrapper" style="height: 255px; width: 100%;">
                                 <picture>
-                                    <img alt="<%# Eval("BlogTitle") %>" src="<%# Eval("BlogTitleImg") %>" loading="eager" style="width: 100%; height: 255px;">
+                                    <img alt="<%# Eval("BlogTitle") %>" src="/<%# Eval("BlogTitleImg") %>" loading="eager" style="width: 100%; height: 255px;">
                                 </picture>
                             </div>
                         </div>

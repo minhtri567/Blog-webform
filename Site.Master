@@ -16,6 +16,7 @@
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/Content/bootstrap/js/bootstrap.bundle.min.js") %>
         <%: Scripts.Render("~/Scripts/MyScript.js") %>
+        <%: Scripts.Render("~/Scripts/jquery/jquery.min.js") %>
     </asp:PlaceHolder>
 </head>
 <body>
@@ -50,6 +51,10 @@
                             <li class="nav-item"><a class="nav-link" href='<%= ResolveUrl("UserBlogs") %>' >Blog của tôi</a></li>
                             <li class="nav-item"><a class="nav-link" href='<%= ResolveUrl("Listfriend") %>'>Bạn bè</a></li>
                         </ul>
+                        <div id="searchContainer" class="d-flex">
+                            <input type="text" name="q" id="searchQuery" placeholder="Tìm kiếm bài viết..." onkeypress="Custom.handleEnter(event)" />
+                            <span  type="button" onclick="Custom.searchPosts()"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        </div>
                         <div class="navbar-right">
                             <asp:PlaceHolder ID="phNotLoggedIn" runat="server">
                                 <a  href='<%= ResolveUrl("Login") %>'>Đăng nhập</a> | 
@@ -106,4 +111,54 @@
         </div>
     </form>
 </body>
+    <script>
+        $(document).ready(function () {
+            // Xử lý sự kiện click cho nút chia sẻ
+            $(".btn-share").on("click", function (e) {
+                e.stopPropagation(); 
+
+                // Xóa Popover đang hiển thị nếu có
+                $(".custom-popover").remove();
+
+                // Lấy thông tin liên kết từ data-link
+                const link = $(this).data("link");
+
+                // Tạo nội dung Popover
+                const popoverContent = `
+                    <div class="custom-popover arrowed-popover" style="position: absolute; z-index: 9; background: #fff; border: 1px solid #ddd; padding: 10px; border-radius: 5px;">
+                        <button class="btn btn-primary btn-sm copy-btn" style="width: 100%;" title="sao chép liên kết">
+                            <i class="fa-solid fa-link"></i>
+                        </button>
+                    </div>
+                `;
+
+                // Thêm Popover vào DOM
+                $("body").append(popoverContent);
+
+                // Lấy vị trí của nút để đặt Popover
+                const offset = $(this).offset();
+                const popover = $(".custom-popover");
+
+                // Đặt vị trí cho Popover
+                popover.css({
+                    top: offset.top + ($(this).outerHeight() / 2) - (popover.outerHeight() / 2), // Căn giữa theo chiều dọc
+                    left: offset.left + $(this).outerWidth() + 10,
+                });
+
+                // Xử lý sao chép liên kết
+                $(".copy-btn").on("click", function () {
+                    navigator.clipboard.writeText(link).then(() => {
+                        Custom.Mytoast("Sao chép thành công","/images/success.svg" )
+                        popover.remove();
+                    });
+                });
+
+                // Đóng Popover khi click bên ngoài
+                $(document).on("click", function () {
+                    popover.remove();
+                });
+            });
+        });
+
+    </script>
 </html>
